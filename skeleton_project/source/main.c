@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "hardware.h"
+#include "channels.h"
 
 /**
 Her er det noe tekst
@@ -23,6 +24,9 @@ int main(){
         if(hardware_read_stop_signal()){
             hardware_command_movement(HARDWARE_MOVEMENT_STOP);
             break;
+        }
+        if(BUTTON_DOWN2 == 0){
+            printf("Knapp trykket inn!!\n");
         }
 
         if(hardware_read_floor_sensor(0)){
