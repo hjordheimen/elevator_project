@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "hardware.h"
-#include "channels.h"
+#include "driver/channels.h"
 
 /**
 Her er det noe tekst
