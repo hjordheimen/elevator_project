@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "hardware.h"
 #include "driver/channels.h"
+#include "driver/io.h"
 
 /**
 Her er det noe tekst
@@ -25,8 +26,8 @@ int main(){
             hardware_command_movement(HARDWARE_MOVEMENT_STOP);
             break;
         }
-        printf("%d\n", BUTTON_DOWN2);
-        
+        printf("%d\n", io_read_bit(BUTTON_DOWN2));
+
 
         if(hardware_read_floor_sensor(0)){
             hardware_command_movement(HARDWARE_MOVEMENT_UP);
