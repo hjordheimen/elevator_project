@@ -25,9 +25,8 @@ int main(){
             hardware_command_movement(HARDWARE_MOVEMENT_STOP);
             break;
         }
-        if(*BUTTON_DOWN2 == 0){
-            printf("Knapp trykket inn!!\n");
-        }
+        printf("%d\n", BUTTON_DOWN2);
+        
 
         if(hardware_read_floor_sensor(0)){
             hardware_command_movement(HARDWARE_MOVEMENT_UP);
