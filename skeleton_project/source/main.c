@@ -2,6 +2,11 @@
 #include <stdlib.h>
 #include "hardware.h"
 
+/**
+Her er det noe tekst
+*/
+
+
 int main(){
     int error = hardware_init();
     if(error != 0){
