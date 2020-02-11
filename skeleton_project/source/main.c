@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "hardware.h"
-#include "driver/channels.h"
-#include "driver/io.h"
+
 
 /**
 Her er det noe tekst
@@ -19,21 +18,15 @@ int main(){
     printf("=== Example Program ===\n");
     printf("Press the stop button on the elevator panel to exit\n");
 
-    hardware_command_movement(HARDWARE_MOVEMENT_UP);
+
 
     while(1){
         if(hardware_read_stop_signal()){
             hardware_command_movement(HARDWARE_MOVEMENT_STOP);
             break;
         }
-        printf("%d\n", io_read_bit(BUTTON_DOWN2));
 
+        printf("%d\n", hardware_read_floor_sensor(0));
 
-        if(hardware_read_floor_sensor(0)){
-            hardware_command_movement(HARDWARE_MOVEMENT_UP);
-        }
-        if(hardware_read_floor_sensor(HARDWARE_NUMBER_OF_FLOORS - 1)){
-            hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
-        }
     }
 }
