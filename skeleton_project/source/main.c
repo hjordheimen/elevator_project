@@ -25,7 +25,7 @@ int main(){
             hardware_command_movement(HARDWARE_MOVEMENT_STOP);
             break;
         }
-        if(BUTTON_DOWN2 != 0){
+        if(*BUTTON_DOWN2 == 0){
             printf("Knapp trykket inn!!\n");
         }
 
