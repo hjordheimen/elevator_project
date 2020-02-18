@@ -107,6 +107,7 @@ int main(){
 
     printf("=== Example Program ===\n");
     printf("Press the stop button on the elevator panel to exit\n");
+    struct Queue* queue = createQueue(10);
 
     hardware_command_movement(HARDWARE_MOVEMENT_UP);
 
@@ -127,12 +128,17 @@ int main(){
         for(int f = 0; f < HARDWARE_NUMBER_OF_FLOORS; f++){
             if(hardware_read_order(f, HARDWARE_ORDER_INSIDE)){
                 hardware_command_floor_indicator_on(f);
+                enqueue(queue, f);
+                print(queue);
+                print("\n");
             }
         }
         /*Stops the motor when we arrive the sensor */
         for (int f = 0; f < HARDWARE_NUMBER_OF_FLOORS; f++){
-            if(hardware_read_floor_sensor(f) == 1){
+            if(hardware_read_floor_sensor(f) == 1 && f == front(queue)){
                 hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+                dequeue(queue);
+
             }
         }
         /*Changes the motordirection when the order is set up*/
