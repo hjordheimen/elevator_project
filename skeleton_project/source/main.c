@@ -57,6 +57,25 @@ int main(){
             if(hardware_read_order(f, HARDWARE_ORDER_INSIDE)){
                 hardware_command_floor_indicator_on(f);
                 printf("%d\n",hardware_read_floor_sensor(f));
+                printf("%d\n",hardware_read_order(f));
+            }
+        }
+
+        for (int f = 0; f < HARDWARE_NUMBER_OF_FLOORS; f++){
+            if(hardware_read_floor_sensor(f) == 1){
+                hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+            }
+        }
+
+        for (int f = 0; f < HARDWARE_NUMBER_OF_FLOORS; f++){
+            if(hardware_read_order(f, HARDWARE_ORDER_UP)){
+                hardware_command_movement(HARDWARE_MOVEMENT_UP);
+            }
+        }
+
+        for (int f = 0; f < HARDWARE_NUMBER_OF_FLOORS; f++){
+            if(hardware_read_order(f, HARDWARE_ORDER_DOWN)){
+                hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
             }
         }
 
