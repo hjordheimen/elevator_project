@@ -129,8 +129,8 @@ int main(){
             if(hardware_read_order(f, HARDWARE_ORDER_INSIDE)){
                 hardware_command_floor_indicator_on(f);
                 enqueue(queue, f);
-                print(queue);
-                print("\n");
+                printf(queue);
+                printf("\n");
             }
         }
         /*Stops the motor when we arrive the sensor */
