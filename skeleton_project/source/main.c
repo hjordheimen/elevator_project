@@ -57,7 +57,6 @@ int main(){
             if(hardware_read_order(f, HARDWARE_ORDER_INSIDE)){
                 hardware_command_floor_indicator_on(f);
                 printf("%d\n",hardware_read_floor_sensor(f));
-                printf("%d\n",hardware_read_order(f));
             }
         }
 
