@@ -56,6 +56,7 @@ int main(){
         for(int f = 0; f < HARDWARE_NUMBER_OF_FLOORS; f++){
             if(hardware_read_order(f, HARDWARE_ORDER_INSIDE)){
                 hardware_command_floor_indicator_on(f);
+                printf("%d\n",hardware_read_floor_sensor(f));
             }
         }
 
