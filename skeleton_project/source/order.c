@@ -16,4 +16,6 @@
 
 
 
+//Ordre ferdig
+
 //Slett alle køer
