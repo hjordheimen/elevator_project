@@ -65,13 +65,7 @@ int main(){
 
             }
         }
-        /*Stops the motor when we arrive the sensor */
-        for (int f = 0; f < HARDWARE_NUMBER_OF_FLOORS; f++){
-            if(hardware_read_floor_sensor(f) == 1 && f == front(queue)){
-                hardware_command_movement(HARDWARE_MOVEMENT_STOP);
 
-            }
-        }
         /*Changes the motordirection when the order is set up*/
         for (int f = 0; f < HARDWARE_NUMBER_OF_FLOORS; f++){
             if(hardware_read_order(f, HARDWARE_ORDER_UP)){
