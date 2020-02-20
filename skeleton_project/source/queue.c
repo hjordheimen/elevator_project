@@ -15,3 +15,6 @@ int volatile queue_down[3] = {0,0,0};//Sorter hver gang det kommer en ny bestill
 
 
 //Sorter fra størst til minst
+
+
+//Ferdig med første element, Sett lik 0, for så å sortere. 
