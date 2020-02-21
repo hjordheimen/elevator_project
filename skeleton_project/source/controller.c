@@ -3,13 +3,10 @@
 #include <stdio.h>
 
 
-typedef struct state{
-    IDLE
-    GOING_UP
-    GOING_DOWN
-    AT_TOP          //Unused
-    AT_BUTTON       //Unused
-}state;
+
+
+
+
 
 
 
@@ -19,4 +16,4 @@ typedef struct state{
 //Trenger å initialize
 
 
-//Polle etter 
+//Polle etter
