@@ -6,10 +6,29 @@
 
 
 static int queue[HARDWARE_NUMBER_OF_FLOORS];
+static int next_order = -1;
+static int order_on_hold = -1;
 
 //Legg til i kø oppover
 
-void add_order_request_up(int floor, HardwareOrder order){
+int get_next_order(){
+    return next_order;
+}
+
+
+void put_order_on_hold(int new_next_order){
+    if(order_on_hold == -1) order_on_hold = next_order;
+    next_order = new_next_order;
+}
+
+void update_next_order(){
+    if (order_on_hold != -1) {
+        next_order = order_on_hold;
+        order_on_hold = -1;
+    }
+}
+
+void add_order_request(int floor, HardwareOrder order){
     queue[floor] = hardware_order_type_bit(order);
 }
 
@@ -37,21 +56,37 @@ void get_button_signal(){
     /* All buttons must be polled, like this: */
     for(int f = 0; f < HARDWARE_NUMBER_OF_FLOORS; f++){
         //Ser om vi har en bestilling ovenifra
-        if(hardware_read_order(f, HARDWARE_ORDER_UP)){
+        if(hardware_read_order(f, HARDWARE_ORDER_UP) && queue[f] == -1){
             //Legg til i kø oppover
-
+            add_order_request(f, HARDWARE_ORDER_UP);
         }
         //Ser om vi har en bestilling nedenifra
-        if(hardware_read_order(f, HARDWARE_ORDER_DOWN)){
+        if(hardware_read_order(f, HARDWARE_ORDER_DOWN) && queue[f] == -1){
             //Legg til i kø oppover
+            add_order_request(f, HARDWARE_ORDER_DOWN);
+
         }
         //Ser om det er en ordre innenfra
-        if(hardware_read_order(f, HARDWARE_ORDER_INSIDE)){
+        if(hardware_read_order(f, HARDWARE_ORDER_INSIDE) && queue[f] != 2){
             //Legg til i ordre inni.
+            add_order_request(f, HARDWARE_ORDER_INSIDE);
+
         }
     }
 }
 
-int get_number_of_floors(){
-    return HARDWARE_NUMBER_OF_FLOORS;
+int any_requests(){
+    for (int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
+        if (queue[floor] != -1) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+int check_floor_dir_value(int floor, int directionvalue){
+    if(queue[floor] == value && next_order != floor){
+        return 1;
+    }
+    return 0;
 }
