@@ -13,3 +13,8 @@ void sort_queue(int up_down);
 
 //Ferdig med første element, Sett lik 0, for så å sortere.
 void dequeue(int queue);
+
+
+//Er det ikke flere ordre? Gå til IDLE-mode
+
+void no_requests(struct queue *queue);
