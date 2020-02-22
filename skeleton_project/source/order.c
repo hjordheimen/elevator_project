@@ -1,4 +1,5 @@
 #include "queue.h"
+#include "hardware.h"
 
 //Her må vi finne ut hvilke knapper som har blitt trykket, for så å sette den i
 // en kø,
