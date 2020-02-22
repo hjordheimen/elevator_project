@@ -37,3 +37,7 @@ void get_button_signal(){
         }
     }
 }
+
+int get_number_of_floors(){
+    return HARDWARE_NUMBER_OF_FLOORS;
+}

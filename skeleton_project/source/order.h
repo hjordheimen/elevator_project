@@ -26,3 +26,5 @@ void look_for_requests();
 //Poller om det er noe signal å hente, både requests opp, ned, eller inni.
 
 void get_button_signal();
+
+int get_number_of_floors();
