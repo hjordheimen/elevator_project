@@ -8,6 +8,13 @@ int volatile queue_inside[HARDWARE_NUMBER_OF_FLOORS] = {0,0,0,0};
 int volatile queue_down[HARDWARE_NUMBER_OF_FLOORS - 1] = {0,0,0};//Sorter hver gang det kommer en ny bestilling.
 
 
+struct queue{
+    int volatile queue_up[HARDWARE_NUMBER_OF_FLOORS - 1] = {0,0,0}; //Sorter liste for hver gang det kommer en ny bestilling.
+    int volatile queue_inside[HARDWARE_NUMBER_OF_FLOORS] = {0,0,0,0};
+    int volatile queue_down[HARDWARE_NUMBER_OF_FLOORS - 1] = {0,0,0};//Sorter hver gang det kommer en ny bestilling.
+};
+
+
 void sort_queue(int up_down){
     if(up_down){
 
@@ -15,4 +22,8 @@ void sort_queue(int up_down){
     else{
 
     }
+}
+
+void dequeue(struct queue *queue){
+    
 }
