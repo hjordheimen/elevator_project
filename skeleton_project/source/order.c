@@ -25,15 +25,15 @@ void get_button_signal(){
     for(int f = 0; f < HARDWARE_NUMBER_OF_FLOORS; f++){
         //Ser om vi har en bestilling ovenifra
         if(hardware_read_order(f, HARDWARE_ORDER_UP)){
-
+            //Legg til i kø oppover
         }
         //Ser om vi har en bestilling nedenifra
         if(hardware_read_order(f, HARDWARE_ORDER_DOWN)){
-
+            //Legg til i kø oppover
         }
         //Ser om det er en ordre innenfra
         if(hardware_read_order(f, HARDWARE_ORDER_INSIDE)){
-
+            //Legg til i ordre inni.
         }
     }
 }
