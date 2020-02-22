@@ -34,6 +34,7 @@ void add_order_request(int floor, HardwareOrder order){
 
 void clear_floor_orders(int floor){
     queue[floor] = -1;
+    next_order = -1;
 }
 
 void clear_all_orders(){
