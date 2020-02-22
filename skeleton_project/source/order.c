@@ -22,7 +22,7 @@ void put_order_on_hold(int new_next_order){
 }
 
 void update_next_order(){
-    if (order_on_hold != -1) {
+    if(next_order == -1 && order_on_hold != -1){
         next_order = order_on_hold;
         order_on_hold = -1;
     }
@@ -68,11 +68,11 @@ void get_button_signal(){
 
         }
         //Ser om det er en ordre innenfra
-        if(hardware_read_order(f, HARDWARE_ORDER_INSIDE) && queue[f] != 2 && someone_inside()){           //Legg til i ordre inni.
+        if(hardware_read_order(f, HARDWARE_ORDER_INSIDE) && queue[f] != 2){           //Legg til i ordre inni.
             add_order_request(f, HARDWARE_ORDER_INSIDE);
             if(queue[next_order] != 2 && queue[order_on_hold] != 2) {
-                next_order = f;
-                order_on_hold = -1;
+                order_on_hold = f;
+                update_next_order();
             }
 
         }
@@ -88,12 +88,6 @@ int any_requests(){
     return 0;
 }
 
-int someone_inside(){ //Bedre å gjøre update next order bedre?
-    if(get_next_state == HALT){
-        return 1;
-    }
-    return 0;
-}
 
 int check_floor_dir_value(int floor, int directionvalue){
     if(queue[floor] == value && next_order != floor){
