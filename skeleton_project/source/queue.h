@@ -10,4 +10,4 @@ void sort_queue(int up_down);
 
 
 //Ferdig med første element, Sett lik 0, for så å sortere.
-void remove_first_element();
+void dequeue(int queue[]);
