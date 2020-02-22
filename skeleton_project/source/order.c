@@ -68,10 +68,13 @@ void get_button_signal(){
 
         }
         //Ser om det er en ordre innenfra
-        if(hardware_read_order(f, HARDWARE_ORDER_INSIDE) && queue[f] != 2){
+        if(hardware_read_order(f, HARDWARE_ORDER_INSIDE) && queue[f] != 2 && someone_inside()){
             //Legg til i ordre inni.
             add_order_request(f, HARDWARE_ORDER_INSIDE);
-            next_order = f;
+            if(queue[next_order] != 2 && queue[order_on_hold] != 2) {
+                next_order = f;
+                order_on_hold = -1;
+            }
 
         }
     }
@@ -82,6 +85,13 @@ int any_requests(){
         if (queue[floor] != -1) {
             return 1;
         }
+    }
+    return 0;
+}
+
+int someone_inside(){
+    if(get_next_state == HALT){
+        return 1;
     }
     return 0;
 }
