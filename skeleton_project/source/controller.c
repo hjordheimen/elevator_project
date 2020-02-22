@@ -6,7 +6,6 @@
 #define BETWEEN_FLOORS -1
 
 static int current_floor = BETWEEN_FLOORS;
-static HardwareMovement current_movement = HARDWARE_MOVEMENT_STOP; //Kanskje ha i orders
 static action action = ENTER;
 static state state = IDLE;
 
