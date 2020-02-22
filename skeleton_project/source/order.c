@@ -13,7 +13,15 @@ void add_order_request_up(int floor, HardwareOrder order){
     queue[floor] = hardware_order_type_bit(order);
 }
 
+void clear_floor_orders(int floor){
+    queue[floor] = -1;
+}
 
+void clear_all_orders(){
+    for (int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++){
+        clear_floor_orders(floor);
+    }
+}
 //Legg til i kø nedover
 
 
