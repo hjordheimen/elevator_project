@@ -1,4 +1,12 @@
 
+
+
+
+//Neste ordre
+
+void next_order();
+
+
 //Bestill ordre oppover
 
 void add_order_request_up(int floor);
@@ -11,13 +19,13 @@ void add_order_request_down(int floor);
 
 void set_order(int floor);
 
+//Slett alle ordre på en gitt etasje
+
+void clear_floor_orders(int floor);
+
 //Slett alle ordre
 
 void clear_all_orders();
-
-//Slett ordre
-
-void remove_order();
 
 //Ser om det er noen inkommende ordre.
 

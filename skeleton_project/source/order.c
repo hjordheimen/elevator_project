@@ -5,6 +5,8 @@
 // en kø,
 
 
+static int queue[HARDWARE_NUMBER_OF_FLOORS];
+
 //Legg til i kø oppover
 
 
