@@ -1,7 +1,7 @@
 
 //Tilstandene vi kan komme i
 
-typedef enum states{
+typedef enum state{
     IDLE,
     GOING_UP,
     GOING_DOWN,
@@ -22,19 +22,23 @@ void initialize();
 
 //Kjør IDLE-tilstanden,
 
-void idle(action action);
+void idle();
 
 //Kjør GOING_UP-tilstanden
 
-void go_up(action action);
+void go_up();
 
 // Kjør GOING_DOWN-tilstanden
 
-void go_down(action action);
+void go_down();
 
 //Kjør HALT-tilstanden
 
-void halt(action action);
+void halt();
+
+void next_state(state next_state, action next_action);
+
+state get_next_state();
 
 //Ser hvor vi er i systemet, hvilken etasje
 

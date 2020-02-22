@@ -6,17 +6,18 @@
 #define BETWEEN_FLOORS -1
 
 static int current_floor = BETWEEN_FLOORS;
-static int last_floor = BETWEEN_FLOORS;
 static HardwareMovement current_movement = HARDWARE_MOVEMENT_STOP;
-static HardwareMovement last_movement = HARDWARE_MOVEMENT_STOP;
-static HardwareMovement movement_before_stop = HARDWARE_MOVEMENT_STOP;
+static action action = ENTER;
+static state state = IDLE;
 
 
 void initialize(){
 
 }
 
-void idle(action action){
+
+
+void idle(){
     switch (action) {
         case ENTER:
             break;
@@ -24,9 +25,11 @@ void idle(action action){
             break;
         case EXIT:
             break;
+        default:
+        break;
 }
 
-void go_up(action action){
+void go_up(){
     switch (action) {
         case ENTER:
             break;
@@ -34,9 +37,11 @@ void go_up(action action){
             break;
         case EXIT:
             break;
+        default:
+        break;
 }
 
-void go_down(action action){
+void go_down(){
     switch (action) {
         case ENTER:
             break;
@@ -44,9 +49,11 @@ void go_down(action action){
             break;
         case EXIT:
             break;
+        default:
+        break;
 }
 
-void halt(action action){
+void halt(){
     switch (action) {
         case ENTER:
             break;
@@ -54,12 +61,22 @@ void halt(action action){
             break;
         case EXIT:
             break;
+        default:
+        break;
+
     }
 
 }
 
 
+void next_state(state next_state, action next_action){
+        state = next_state;
+        action = next_action;
+}
 
+state get_next_state(){
+    return state;
+}
 
 
 int get_current_floor(){
