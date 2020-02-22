@@ -43,8 +43,6 @@ void go_up(){
                 next_state(HALT, ENTER);
             }
             break;
-        case EXIT:
-            break;
         default:
         break;
 }
@@ -56,8 +54,14 @@ void go_down(){
         next_state(GOING_DOWN, INSIDE);
             break;
         case INSIDE:
-            break;
-        case EXIT:
+        for (int floor = current_floor; floor > 0; floor--){
+            if (check_floor_dir_value(floor, 1)){
+                put_order_on_hold(floor);
+            }
+        }
+        if (current_floor == next_order) {
+            next_state(HALT, ENTER);
+        }
             break;
         default:
         break;
