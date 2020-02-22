@@ -30,9 +30,23 @@ void update_next_order(){
 
 void add_order_request(int floor, HardwareOrder order){
     queue[floor] = hardware_order_type_bit(order);
+    hardware_command_order_light(floor, order, 1);
 }
 
 void clear_floor_orders(int floor){
+    switch (queue[floor]) {
+        case 0:
+            hardware_command_order_light(floor, HARDWARE_ORDER_UP, 0);
+            break;
+        case 1:
+            hardware_command_order_light(floor, HARDWARE_ORDER_DOWN, 0);
+            break;
+        case 2:
+            hardware_command_order_light(floor, HARDWARE_ORDER_INSIDE, 0);
+            break;
+        default:
+            break;
+    }
     queue[floor] = -1;
     next_order = -1;
 }
