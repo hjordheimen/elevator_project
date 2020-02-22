@@ -2,7 +2,7 @@
 //Samme motstatt for motsatt vei
 
 
-struct 
+
 
 //Sorter fra minst til størst, unntak er nullerne.
 void sort_queue(int up_down);
