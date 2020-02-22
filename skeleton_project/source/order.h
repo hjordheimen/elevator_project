@@ -9,11 +9,7 @@ void next_order();
 
 //Bestill ordre oppover
 
-void add_order_request_up(int floor);
-
-//Bestill ordre nedover
-
-void add_order_request_down(int floor);
+void add_order_request(int floor, HardwareOrder order);
 
 //Hvor skal bestilingen
 
