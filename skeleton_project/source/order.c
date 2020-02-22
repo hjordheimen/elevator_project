@@ -70,6 +70,7 @@ void get_button_signal(){
         if(hardware_read_order(f, HARDWARE_ORDER_INSIDE) && queue[f] != 2){
             //Legg til i ordre inni.
             add_order_request(f, HARDWARE_ORDER_INSIDE);
+            next_order = f;
 
         }
     }
