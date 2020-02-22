@@ -6,6 +6,7 @@
 #define BETWEEN_FLOORS -1
 
 static int current_floor = BETWEEN_FLOORS;
+static HardwareMovement last_movement = HARDWARE_MOVEMENT_STOP;
 static action action = ENTER;
 static state state = IDLE;
 
@@ -31,6 +32,7 @@ void go_up(){
     switch (action) {
         case ENTER:
         hardware_command_movement(HARDWARE_MOVEMENT_UP);
+        last_movement = HARDWARE_MOVEMENT_UP;
         next_state(GOING_UP, INSIDE);
             break;
         case INSIDE:
@@ -51,6 +53,7 @@ void go_down(){
     switch (action) {
         case ENTER:
         hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
+        last_movement = HARDWARE_MOVEMENT_DOWN;
         next_state(GOING_DOWN, INSIDE);
             break;
         case INSIDE:
