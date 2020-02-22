@@ -1,11 +1,11 @@
 
 //Bestill ordre oppover
 
-void add_order_up(int floor);
+void add_order_request_up(int floor);
 
 //Bestill ordre nedover
 
-void add_order_down(int floor);
+void add_order_request_down(int floor);
 
 //Hvor skal bestilingen
 
