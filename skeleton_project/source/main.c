@@ -106,5 +106,22 @@ int main(){
         }
     }
 
+    while(1){
+        switch (get_next_state()) {
+            case IDLE:
+                idle();
+                break;
+            case GOING_UP:
+                go_up();
+                break;
+            case GOING_DOWN:
+                go_down();
+                break;
+            case HALT;
+                halt();
+                break;
+        }
+    }
+
     return 0;
 }
