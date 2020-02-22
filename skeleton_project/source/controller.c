@@ -12,6 +12,56 @@ static HardwareMovement last_movement = HARDWARE_MOVEMENT_STOP;
 static HardwareMovement movement_before_stop = HARDWARE_MOVEMENT_STOP;
 
 
+void initialize(){
+
+}
+
+void idle(action action){
+    switch (action) {
+        case ENTER:
+            break;
+        case INSIDE:
+            break;
+        case EXIT:
+            break;
+}
+
+void go_up(action action){
+    switch (action) {
+        case ENTER:
+            break;
+        case INSIDE:
+            break;
+        case EXIT:
+            break;
+}
+
+void go_down(action action){
+    switch (action) {
+        case ENTER:
+            break;
+        case INSIDE:
+            break;
+        case EXIT:
+            break;
+}
+
+void halt(action action){
+    switch (action) {
+        case ENTER:
+            break;
+        case INSIDE:
+            break;
+        case EXIT:
+            break;
+    }
+
+}
+
+
+
+
+
 int get_current_floor(){
     return current_floor;
 }
