@@ -76,6 +76,7 @@ void halt(){
         case ENTER:
         hardware_command_movement(HARDWARE_MOVEMENT_STOP);
         //OPEN DOOR for 3 seconds, Sette på en Timer.
+        hardware_command_floor_indicator_on(current_floor);
         clear_floor_orders(current_floor);
         next_state(HALT, INSIDE);
             break;
