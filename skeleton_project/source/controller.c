@@ -116,6 +116,9 @@ int get_current_floor(){
     return current_floor;
 }
 
+void read_buttons(){
+    get_button_signal();
+}
 
 
 
