@@ -22,20 +22,20 @@ void initialize();
 
 //Kjør IDLE-tilstanden,
 
-void idle();
+void idle(action action);
 
 //Kjør GOING_UP-tilstanden
 
-void go_up();
+void go_up(action action);
 
 // Kjør GOING_DOWN-tilstanden
 
-void go_down();
+void go_down(action action);
 
 //Kjør HALT-tilstanden
 
-void halt();
+void halt(action action);
 
 //Ser hvor vi er i systemet, hvilken etasje
 
-int get_current_floot();
+int get_current_floor();
