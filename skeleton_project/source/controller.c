@@ -28,9 +28,9 @@ void initialize(){
 void idle(){
     if (any_requests()) {
         if (get_next_order() < current_floor) {
-            next_state(GOING_DOWN, ENTER)
+            next_state(GOING_DOWN, ENTER);
         }
-        else next_state(GOING_UP, ENTER)
+        else next_state(GOING_UP, ENTER);
     }
 
 }
