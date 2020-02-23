@@ -28,6 +28,7 @@ void initialize(){
 
 
 void idle(){
+    hardware_command_movement(HARDWARE_MOVEMENT_STOP);
     if (any_requests()) {
         if (get_next_order() < current_floor) {
             next_state(GOING_DOWN, ENTER);
