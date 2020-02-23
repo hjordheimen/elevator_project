@@ -23,7 +23,7 @@ static int hardware_legal_floor(int floor, HardwareOrder order_type){
     return 1;
 }
 
-static int hardware_order_type_bit(HardwareOrder order_type){
+int hardware_order_type_bit(HardwareOrder order_type){
     int type_bit;
 
     switch(order_type){
