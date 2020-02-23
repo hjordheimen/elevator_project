@@ -30,7 +30,7 @@ void update_next_order(){
 }
 
 void add_order_request(int floor, HardwareOrder order){
-    queue[floor] = hardware_order_type_bit(order);
+    queue[floor] = hardware_read_order(order); //Se om dette funker likt som hardware_order_type_bit
     hardware_command_order_light(floor, order, 1);
 }
 
