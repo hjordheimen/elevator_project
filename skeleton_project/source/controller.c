@@ -108,6 +108,11 @@ void halt(){
 
 }
 
+void update_current_floor(){
+    for (int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
+        if(hardware_read_floor_sensor(floor)) current_floor = floor;
+    }
+}
 
 void next_state(state next_state, action next_action){
         state = next_state;
