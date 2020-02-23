@@ -9,8 +9,8 @@
 
 static int current_floor = BETWEEN_FLOORS;
 static HardwareMovement last_movement = HARDWARE_MOVEMENT_STOP;
-static action action = ENTER;
-static state state = IDLE;
+static action_t action = ENTER;
+static state_t state = IDLE;
 
 
 void initialize(){
@@ -120,12 +120,12 @@ void update_current_floor(){
     }
 }
 
-void next_state(state next_state, action next_action){
+void next_state(state_t next_state, action_t next_action){
         state = next_state;
         action = next_action;
 }
 
-state get_next_state(){
+state_t get_next_state(){
     return state;
 }
 

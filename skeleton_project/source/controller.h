@@ -38,9 +38,9 @@ void halt();
 
 void update_current_floor();
 
-void next_state(state next_state, action next_action);
+void next_state(state_t next_state, action_t next_action);
 
-state get_next_state();
+state_t get_next_state();
 
 //Ser hvor vi er i systemet, hvilken etasje
 
