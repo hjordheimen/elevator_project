@@ -127,7 +127,20 @@ void read_buttons(){
     get_button_signal();
 }
 
-
+void stop(){
+    if(hardware_read_stop_signal()){
+        hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+        clear_all_orders();
+        while (hardware_read_stop_signal) {
+            hardware_command_stop_light(1);
+        }
+        stop_delay = time(NULL);
+        while (time(NULL) - stop_delay < CLOSING_TIME) {
+            //Do nothing
+        }
+        next_state(IDLE, ENTER);
+    }
+}
 
 
 
