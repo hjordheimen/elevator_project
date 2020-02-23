@@ -30,6 +30,8 @@ typedef enum {
     HARDWARE_ORDER_DOWN
 } HardwareOrder;
 
+
+int hardware_order_type_bit(HardwareOrder order);
 /**
  * @brief Initializes the elevator control hardware.
  * Must be called once before other calls to the elevator
