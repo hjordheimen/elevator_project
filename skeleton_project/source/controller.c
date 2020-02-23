@@ -55,6 +55,7 @@ void go_up(){
         default:
         break;
 }
+}
 
 void go_down(){
     switch (action) {
@@ -155,7 +156,6 @@ void stop(){
         next_state(IDLE, ENTER);
     }
 }
-
 
 
 //Controlleren må være "føleren" som skal kjenne på sensorene til en hver tid.
