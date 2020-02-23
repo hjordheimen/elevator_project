@@ -3,6 +3,7 @@
 #include <limits.h>
 #include <signal.h>
 #include "hardware.h"
+#include "controller.h"
 
 static void clear_all_order_lights(){
     HardwareOrder order_types[3] = {
@@ -86,6 +87,7 @@ int main(){
                 break;
         }
         read_buttons();
+        update_current_floor();
     }
 
     return 0;
