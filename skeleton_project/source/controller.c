@@ -27,7 +27,7 @@ void initialize(){
 
 void idle(){
     if (any_requests()) {
-        if (get_next_order < current_floor) {
+        if (get_next_order() < current_floor) {
             next_state(GOING_DOWN, ENTER)
         }
         else next_state(GOING_UP, ENTER)
@@ -43,7 +43,7 @@ void go_up(){
         next_state(GOING_UP, INSIDE);
             break;
         case INSIDE:
-            for (int floor = current_floor; floor < get_next_order; floor++){
+            for (int floor = current_floor; floor < get_next_order(); floor++){
                 if (check_floor_dir_value(floor, 0)){
                     put_order_on_hold(floor);
                 }
@@ -97,10 +97,10 @@ void halt(){
         //Dørene lukkes.
         hardware_command_door_open(0);
         update_next_order();
-        if (get_next_order == -1)) {
+        if (get_next_order() == -1)) {
             next_state(IDLE, ENTER);
         }
-        else if(get_next_order < current_floor){
+        else if(get_next_order() < current_floor){
             next_state(GOING_DOWN, ENTER);
         }
         else{
