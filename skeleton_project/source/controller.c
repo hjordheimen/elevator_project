@@ -97,7 +97,7 @@ void halt(){
         //Dørene lukkes.
         hardware_command_door_open(0);
         update_next_order();
-        if (get_next_order() == -1)) {
+        if (get_next_order() == -1) {
             next_state(IDLE, ENTER);
         }
         else if(get_next_order() < current_floor){
