@@ -1,4 +1,4 @@
-SOURCES := main.c, controller.h, order.h
+SOURCES := main.c controller.c order.c
 
 SOURCE_DIR := source
 BUILD_DIR := build
