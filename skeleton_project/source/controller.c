@@ -97,6 +97,7 @@ void halt(){
         case INSIDE:
         //Hvis timeren er ferdig, hopp til exit, der vi lukker døren, og går videre.
             if(time(NULL) - door_time > CLOSING_TIME) next_state(HALT, EXIT);
+            //Sette inn obstruksjonsknappen her
             break;
         case EXIT:
         //Dørene lukkes.
