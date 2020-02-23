@@ -41,7 +41,7 @@ void put_order_on_hold(int new_next_order){
 }
 
 void update_next_order(){
-    if(next_order == -1 && order_on_hold != -1){
+    if(next_order == -1 && order_on_hold > -1){
         next_order = order_on_hold;
         order_on_hold = -1;
     }
