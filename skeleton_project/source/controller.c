@@ -41,7 +41,7 @@ void go_up(){
     switch (action) {
         case ENTER:
         hardware_command_movement(HARDWARE_MOVEMENT_UP);
-        last_movement = HARDWARE_MOVEMENT_UP;
+        // last_movement = HARDWARE_MOVEMENT_UP;
         next_state(GOING_UP, INSIDE);
             break;
         case INSIDE:
@@ -63,7 +63,7 @@ void go_down(){
     switch (action) {
         case ENTER:
         hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
-        last_movement = HARDWARE_MOVEMENT_DOWN;
+        // last_movement = HARDWARE_MOVEMENT_DOWN;
         next_state(GOING_DOWN, INSIDE);
             break;
         case INSIDE:
