@@ -13,8 +13,13 @@ static state state = IDLE;
 
 
 void initialize(){
-
-
+    update_current_floor();
+    hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
+    while (current_floor == -1) {
+        update_current_floor();
+    }
+    hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+    printf("Da er vi klare! :D \n\n");
 }
 
 
