@@ -19,6 +19,7 @@ void initialize(){
     hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
     while (current_floor == BETWEEN_FLOORS) {
         update_current_floor();
+        hardware_command_movement(HARDWARE_MOVEMENT_STOP);
     }
     hardware_command_movement(HARDWARE_MOVEMENT_STOP);
     printf("Da er vi klare! :D \n\n");
