@@ -47,7 +47,7 @@ int main(){
         }
         read_buttons();
         update_current_floor();
-        printf("%d\n", get_next_order());
+        stop();
     }
 
     return 0;
