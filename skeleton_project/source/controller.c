@@ -134,11 +134,12 @@ int get_current_floor(){
     return current_floor;
 }
 
-void read_buttons(){
+int read_buttons(){
     get_button_signal();
+    return 0;
 }
 
-void stop(){
+int stop(){
     if(hardware_read_stop_signal()){
         hardware_command_movement(HARDWARE_MOVEMENT_STOP);
         clear_all_orders();
@@ -154,6 +155,7 @@ void stop(){
         }
         next_state(IDLE, ENTER);
     }
+    return 0;
 }
 
 

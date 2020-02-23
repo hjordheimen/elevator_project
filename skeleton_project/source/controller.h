@@ -46,6 +46,6 @@ state_t get_next_state();
 
 int get_current_floor();
 
-void read_buttons();
+int read_buttons();
 
-void stop();
+int stop();
