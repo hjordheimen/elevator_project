@@ -4,7 +4,7 @@
 
 //Neste ordre
 
-void get_next_order();
+int get_next_order();
 
 void put_order_on_hold(int new_next_order);
 
