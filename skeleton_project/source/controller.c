@@ -48,7 +48,7 @@ void go_up(){
                     put_order_on_hold(floor);
                 }
             }
-            if (current_floor == next_order) {
+            if (current_floor == get_next_order()) {
                 next_state(HALT, ENTER);
             }
             break;
@@ -69,7 +69,7 @@ void go_down(){
                 put_order_on_hold(floor);
             }
         }
-        if (current_floor == next_order) {
+        if (current_floor == get_next_order()) {
             next_state(HALT, ENTER);
         }
             break;
