@@ -61,7 +61,7 @@ int main(){
         }
         read_buttons();
         update_current_floor();
-        printf("%d\n", get_next_state());
+        printf("%d\n", get_current_floor());
     }
 
     return 0;
