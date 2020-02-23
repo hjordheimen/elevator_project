@@ -154,6 +154,7 @@ int stop(){
             //Do nothing
         }
         hardware_command_door_open(0);
+        hardware_command_stop_light(0);
         int stop_delay = time(NULL);
         while (time(NULL) - stop_delay < CLOSING_TIME) {
             //Do nothing
