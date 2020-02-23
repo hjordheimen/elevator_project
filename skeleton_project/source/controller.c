@@ -143,7 +143,9 @@ void stop(){
         clear_all_orders();
         while (hardware_read_stop_signal) {
             hardware_command_stop_light(1);
+            if(hardware_read_floor_sensor(current_floor)) hardware_command_door_open(1);
         }
+        hardware_command_door_open(0);
         stop_delay = time(NULL);
         while (time(NULL) - stop_delay < CLOSING_TIME) {
             //Do nothing
