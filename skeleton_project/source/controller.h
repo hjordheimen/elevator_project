@@ -36,6 +36,8 @@ void go_down();
 
 void halt();
 
+void update_current_floor();
+
 void next_state(state next_state, action next_action);
 
 state get_next_state();
@@ -43,3 +45,7 @@ state get_next_state();
 //Ser hvor vi er i systemet, hvilken etasje
 
 int get_current_floor();
+
+void read_buttons();
+
+void stop();
