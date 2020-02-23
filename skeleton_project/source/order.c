@@ -104,7 +104,7 @@ int any_requests(){
 
 
 int check_floor_dir_value(int floor, int directionvalue){
-    if(queue[floor] == value && next_order != floor){
+    if(queue[floor] == directionvalue && next_order != floor){
         return 1;
     }
     return 0;
