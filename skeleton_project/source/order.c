@@ -124,6 +124,8 @@ void get_button_signal(){
 int any_requests(){
     for (int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
         if (queue[floor] > -1) {
+            order_on_hold = f;
+            update_next_order();
             return 1;
         }
     }
