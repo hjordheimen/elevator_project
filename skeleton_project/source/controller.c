@@ -15,6 +15,7 @@ static int door_time;
 
 
 void initialize(){
+    hardware_init();
     update_current_floor();
     hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
     while (current_floor == BETWEEN_FLOORS) {
