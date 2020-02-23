@@ -6,7 +6,7 @@ typedef enum state{
     GOING_UP,
     GOING_DOWN,
     HALT
-}state;
+}state_t;
 
 //Hva skal skje når vi ankommer, er i, eller går ut fra en tilstand, state.
 
@@ -14,7 +14,7 @@ typedef enum action {
     ENTER,
     INSIDE,
     EXIT
-}action;
+}action_t;
 
 //Initialiserer heisen, Der vi kommer i en tilstand
 
