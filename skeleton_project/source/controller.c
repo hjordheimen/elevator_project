@@ -11,6 +11,7 @@ static int current_floor = BETWEEN_FLOORS;
 static HardwareMovement last_movement = HARDWARE_MOVEMENT_STOP;
 static action_t action = ENTER;
 static state_t state = IDLE;
+static int door_time;
 
 
 void initialize(){
@@ -87,7 +88,7 @@ void halt(){
         clear_floor_orders(current_floor);
         //OPEN DOOR for 3 seconds, Sette på en Timer.
         hardware_command_door_open(1);
-        int door_time = time(NULL);
+        door_time = time(NULL);
         next_state(HALT, INSIDE);
             break;
         case INSIDE:
