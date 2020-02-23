@@ -71,7 +71,7 @@ void clear_floor_orders(int floor){
 }
 
 void clear_all_orders(){
-    clear_all_orders();
+    clear_all_order_lights();
     for (int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++){
         clear_floor_orders(floor);
     }
