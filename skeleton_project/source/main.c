@@ -61,11 +61,7 @@ int main(){
         }
         read_buttons();
         update_current_floor();
-<<<<<<< HEAD
         printf("%d\n", get_current_floor());
-=======
-        printf("%d\n", get_current_floor();
->>>>>>> 6ee071bf330e1ca86793b5c9ca29f9ed567f328e
     }
 
     return 0;
