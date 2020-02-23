@@ -4,7 +4,11 @@
 
 //Neste ordre
 
-void next_order();
+void get_next_order();
+
+void put_order_on_hold(int new_next_order);
+
+void update_next_order();
 
 
 //Bestill ordre oppover
@@ -24,4 +28,6 @@ void clear_all_orders();
 
 void get_button_signal();
 
-int get_number_of_floors();
+int any_requests();
+
+int check_floor_dir_value(int floor, int directionvalue);
