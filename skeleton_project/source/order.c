@@ -94,11 +94,19 @@ void get_button_signal(){
         if(hardware_read_order(f, HARDWARE_ORDER_UP) && queue[f] == -1){
             //Legg til i kø oppover
             add_order_request(f, HARDWARE_ORDER_UP);
+            if(queue[order_on_hold] != -1) {
+                order_on_hold = f;
+                update_next_order();
+            }
         }
         //Ser om vi har en bestilling nedenifra
         if(hardware_read_order(f, HARDWARE_ORDER_DOWN) && queue[f] == -1){
             //Legg til i kø oppover
             add_order_request(f, HARDWARE_ORDER_DOWN);
+            if(queue[order_on_hold] != -1) {
+                order_on_hold = f;
+                update_next_order();
+            }
 
         }
         //Ser om det er en ordre innenfra
