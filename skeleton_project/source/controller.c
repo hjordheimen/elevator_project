@@ -8,7 +8,7 @@
 #define BETWEEN_FLOORS -1
 
 static int current_floor = BETWEEN_FLOORS;
-static HardwareMovement last_movement = HARDWARE_MOVEMENT_STOP;
+// static HardwareMovement last_movement = HARDWARE_MOVEMENT_STOP;
 static action_t action = ENTER;
 static state_t state = IDLE;
 static int door_time;
