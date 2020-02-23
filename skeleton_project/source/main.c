@@ -39,7 +39,7 @@ int main(){
     }
 
     signal(SIGINT, sigint_handler);
-
+    hardware_command_movement(HARDWARE_MOVEMENT_STOP);
     printf("NU KØR VI!\n");
 
     initialize();
