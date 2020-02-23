@@ -55,7 +55,7 @@ int main(){
             case GOING_DOWN:
                 go_down();
                 break;
-            case HALT;
+            case HALT:
                 halt();
                 break;
         }
