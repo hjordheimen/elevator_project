@@ -90,6 +90,7 @@ void halt(){
         hardware_command_floor_indicator_on(current_floor);
         clear_floor_orders(current_floor);
         update_next_order();
+        printf("%d\n", get_next_order());
         //OPEN DOOR for 3 seconds, Sette på en Timer.
         hardware_command_door_open(1);
         door_time = time(NULL);
@@ -103,6 +104,7 @@ void halt(){
             break;
         case EXIT:
         //Dørene lukkes.
+        printf("%d\n", get_next_order());
         hardware_command_door_open(0);
         if (get_next_order() == -1) {
             next_state(IDLE, ENTER);
