@@ -69,11 +69,7 @@ void go_down(){
         next_state(GOING_DOWN, INSIDE);
             break;
         case INSIDE:
-<<<<<<< HEAD
         for (int floor = current_floor; floor > get_next_order(); floor--){
-=======
-        for (int floor = 0; floor < current_floor; floor++){
->>>>>>> e278a608d5e839047ad05993923d159b544c127f
             if (check_floor_dir_value(floor, 1)){
                 put_order_on_hold(floor);
             }
