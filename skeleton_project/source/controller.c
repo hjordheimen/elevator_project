@@ -160,16 +160,15 @@ int stop(){
         hardware_command_movement(HARDWARE_MOVEMENT_STOP);
         clear_all_orders();
         hardware_command_stop_light(1);
-        if(hardware_read_floor_sensor(current_floor)) hardware_command_door_open(1);
         while (hardware_read_stop_signal()) {
+            if(hardware_read_floor_sensor(current_floor)) hardware_command_door_open(1);
+        }
+        hardware_command_stop_light(0);
+        door_time = time(NULL);
+        while (time(NULL) - door_time < CLOSING_TIME) {
             //Do nothing
         }
         hardware_command_door_open(0);
-        hardware_command_stop_light(0);
-        int stop_delay = time(NULL);
-        while (time(NULL) - stop_delay < CLOSING_TIME) {
-            //Do nothing
-        }
         next_state(IDLE, ENTER);
     }
     return 0;
