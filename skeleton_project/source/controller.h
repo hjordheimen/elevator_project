@@ -44,6 +44,8 @@ state_t get_next_state();
 
 //Ser hvor vi er i systemet, hvilken etasje
 
+void obstruction(int obstruction_signal);
+
 int get_current_floor();
 
 int read_buttons();

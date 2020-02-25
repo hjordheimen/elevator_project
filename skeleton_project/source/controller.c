@@ -123,7 +123,7 @@ void halt(){
 
 }
 
-static void obstruction(int obstruction_signal){
+void obstruction(int obstruction_signal){
     if(obstruction_signal){
         door_time = time(NULL);
     }
