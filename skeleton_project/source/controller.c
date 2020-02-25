@@ -166,7 +166,7 @@ int stop(){
         hardware_command_stop_light(0);
         door_time = time(NULL);
         while (time(NULL) - door_time < CLOSING_TIME) {
-            //Do nothing
+            if(hardware_read_floor_sensor(current_floor)) obstruction(hardware_read_obstruction_signal());
         }
         hardware_command_door_open(0);
         next_state(IDLE, ENTER);
