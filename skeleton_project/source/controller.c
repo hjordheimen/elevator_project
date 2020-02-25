@@ -8,7 +8,7 @@
 #define BETWEEN_FLOORS -1
 
 static int current_floor = BETWEEN_FLOORS;
-// static HardwareMovement last_movement = HARDWARE_MOVEMENT_STOP;
+static HardwareMovement last_movement = HARDWARE_MOVEMENT_STOP;
 static action_t action = ENTER;
 static state_t state = IDLE;
 static int door_time;
@@ -43,7 +43,7 @@ void go_up(){
     switch (action) {
         case ENTER:
         hardware_command_movement(HARDWARE_MOVEMENT_UP);
-        // last_movement = HARDWARE_MOVEMENT_UP;
+        last_movement = HARDWARE_MOVEMENT_UP;
         next_state(GOING_UP, INSIDE);
             break;
         case INSIDE:
@@ -65,7 +65,7 @@ void go_down(){
     switch (action) {
         case ENTER:
         hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
-        // last_movement = HARDWARE_MOVEMENT_DOWN;
+        last_movement = HARDWARE_MOVEMENT_DOWN;
         next_state(GOING_DOWN, INSIDE);
             break;
         case INSIDE:
@@ -99,6 +99,7 @@ void halt(){
         //Hvis timeren er ferdig, hopp til exit, der vi lukker døren, og går videre.
             if(time(NULL) - door_time > CLOSING_TIME) next_state(HALT, EXIT);
             //Sette inn obstruksjonsknappen her
+            obstruction(hardware_read_obstruction_signal());
             break;
         case EXIT:
         //Dørene lukkes.
@@ -119,6 +120,13 @@ void halt(){
     }
 
 }
+
+void obstruction(int obstruction_signal){
+    if(obstruction_signal){
+        door_time = time(NULL);
+    }
+}
+
 
 void update_current_floor(){
     for (int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
