@@ -1,6 +1,13 @@
-
-//Tilstandene vi kan komme i
-
+/**
+ * @file
+ * @brief controller is the controlling unit for the elevator. It is build up as
+ * a state machine, where it can hold 4 types of states, and have up to 3 actions
+ * to do while in a specific state.
+ *
+ * Controller is where the magic happens ;) 
+ *
+ * Henrik Jordheim
+ */
 typedef enum state{
     IDLE,
     GOING_UP,
