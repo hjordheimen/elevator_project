@@ -1,4 +1,17 @@
-
+/**
+ * @file
+ * @brief Order takes care for the order-handling in the elevator project.
+ * It is constructed of a list, where the length of the list is the number of floors.
+ *
+ * The orders occur on which floor you want to go to, if you want to go up/down --> 0/1.
+ * The orderlist takes into account that you want to go up/down, and respects the
+ * INSIDE orders to perform as a priority, but takes on orders that want to go in
+ * the same direction.
+ *
+ * @Dependencies hardware, controller
+ *
+ * Henrik Jordheim
+ */
 
 
 
