@@ -31,7 +31,7 @@ typedef enum {
 } HardwareOrder;
 
 
-int hardware_order_type_bit(HardwareOrder order);
+
 /**
  * @brief Initializes the elevator control hardware.
  * Must be called once before other calls to the elevator
@@ -40,6 +40,14 @@ int hardware_order_type_bit(HardwareOrder order);
  * @return 0 on success. Non-zero for failure.
  */
 int hardware_init();
+
+/**
+* @brief returns the bit for an given ordertype.
+*
+* @param order which depend on three different ordertypes
+*/
+
+int hardware_order_type_bit(HardwareOrder order);
 
 /**
  * @brief Commands the elevator to either move up or down,
