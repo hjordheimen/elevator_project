@@ -32,7 +32,6 @@ typedef enum action {
     EXIT
 }action_t;
 
-//Initialiserer heisen, Der vi kommer i en tilstand
 /**
 * @brief Initializes the hardware, resets the orders and lighting.
 *
@@ -43,15 +42,11 @@ typedef enum action {
 
 void initialize();
 
-//Kjør IDLE-tilstanden,
-
 /**
 * @brief The elevator is standing still, and continously looking for new requests
 */
 
 void idle();
-
-//Kjør GOING_UP-tilstanden
 
 /**
 * @brief takes the elevator up towards the ordered request.
@@ -59,14 +54,12 @@ void idle();
 
 void go_up();
 
-// Kjør GOING_DOWN-tilstanden
 /**
 * @brief takes the elevator down towards the ordered request.
 */
 
 void go_down();
 
-//Kjør HALT-tilstanden
 /**
 * @brief When the elevator reaches the requested floor,
 * it halts, opens the door for 3 seconds, let passangers go on & off, closes the door,

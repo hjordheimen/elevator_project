@@ -2,8 +2,6 @@
 #include "hardware.h"
 #include "order.h"
 
-//Her må vi finne ut hvilke knapper som har blitt trykket, for så å sette den i
-// en kø,
 
 
 static int queue[HARDWARE_NUMBER_OF_FLOORS];
@@ -28,8 +26,6 @@ static void clear_all_order_lights(){
 }
 
 
-//Legg til i kø oppover
-
 int get_next_order(){
     return next_order;
 }
@@ -48,7 +44,7 @@ void update_next_order(){
 }
 
 void add_order_request(int floor, HardwareOrder order){
-    queue[floor] = hardware_order_type_bit(order); //Se om dette funker likt som hardware_order_type_bit
+    queue[floor] = hardware_order_type_bit(order);
     hardware_command_order_light(floor, order, 1);
 }
 
@@ -76,17 +72,6 @@ void clear_all_orders(){
         clear_floor_orders(floor);
     }
 }
-//Legg til i kø nedover
-
-
-//Legg til i intern kø
-
-
-
-//Ordre ferdig
-
-//Slett alle køer
-
 void get_button_signal(){
     /* All buttons must be polled, like this: */
     for(int f = 0; f < HARDWARE_NUMBER_OF_FLOORS; f++){
@@ -110,7 +95,7 @@ void get_button_signal(){
 
         }
         //Ser om det er en ordre innenfra
-        if(hardware_read_order(f, HARDWARE_ORDER_INSIDE) && queue[f] != 2){           //Legg til i ordre inni.
+        if(hardware_read_order(f, HARDWARE_ORDER_INSIDE) && queue[f] != 2){
             add_order_request(f, HARDWARE_ORDER_INSIDE);
             if(queue[next_order] != 2 && queue[order_on_hold] != 2) {
                 order_on_hold = f;
