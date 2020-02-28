@@ -49,6 +49,17 @@ static void move_elevator(){
     }
 }
 
+static void obstruction(){
+    while(hardware_read_obstruction_signal()){
+        door_time = time(NULL);
+    }
+}
+
+static void next_state(state_t next_state, action_t next_action){
+        state = next_state;
+        action = next_action;
+}
+
 void initialize(){
     hardware_init();
     clear_all_orders();
@@ -139,14 +150,6 @@ void halt(){
 }
 
 
-
-void obstruction(){
-    while(hardware_read_obstruction_signal()){
-        door_time = time(NULL);
-    }
-}
-
-
 void update_current_floor(){
     for (int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
         if(hardware_read_floor_sensor(floor)) {
@@ -156,12 +159,6 @@ void update_current_floor(){
         else current_floor = BETWEEN_FLOORS
     }
 }
-
-void next_state(state_t next_state, action_t next_action){
-        state = next_state;
-        action = next_action;
-}
-
 
 
 int read_buttons(){
