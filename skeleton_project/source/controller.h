@@ -98,10 +98,10 @@ state_t get_next_state();
 * @brief While the door is open, and the obstruction flicker is on, then the whole
 * elevator freezes.
 *
-* @param obstruction_signal from @c hardware_read_obstruction_signal which is 1 or 0.
+* Uses @c hardware_read_obstruction_signal.
 */
 
-void obstruction(int obstruction_signal);
+void obstruction();
 
 /**
 * @brief returns the current_floor
