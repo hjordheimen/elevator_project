@@ -104,13 +104,6 @@ state_t get_next_state();
 void obstruction();
 
 /**
-* @brief returns the current_floor
-*/
-
-
-int get_current_floor();
-
-/**
 * @brief Uses @c get_button_signal from the order module.
 *
 * Makes the connection between main and order.
