@@ -31,7 +31,7 @@ static void other_on_the_way(){
     }
 }
 
-static three_seconds_gone(){
+static int three_seconds_gone(){
     if(time(NULL) - door_time > CLOSING_TIME) return 1;
     return 0;
 }
