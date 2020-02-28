@@ -46,7 +46,7 @@ void update_next_order(){
 
 void add_order_request(int floor, HardwareOrder order){
     hardware_command_order_light(floor, order, 1);
-    if(queue[floor] != -1) queue[floor] = hardware_order_type_bit(order);
+    queue[floor] = hardware_order_type_bit(order);
 
 }
 
