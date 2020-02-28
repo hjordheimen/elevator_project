@@ -9,6 +9,8 @@
  * Henrik Jordheim
  */
 
+
+
  /**
  * @brief state type is used in switch-case in main, and as a global variable
  * next_state.
@@ -31,6 +33,7 @@ typedef enum action {
     INSIDE,
     EXIT
 }action_t;
+
 
 /**
 * @brief Initializes the hardware, resets the orders and lighting.
@@ -78,23 +81,6 @@ void halt();
 
 
 void update_current_floor();
-
-/**
-* @brief Sets the next state, and with the occuring action depending on the switch
-*/
-
-
-void next_state(state_t next_state, action_t next_action);
-
-
-/**
-* @brief While the door is open, and the obstruction flicker is on, then the whole
-* elevator freezes.
-*
-* Uses @c hardware_read_obstruction_signal.
-*/
-
-void obstruction();
 
 /**
 * @brief Uses @c get_button_signal from the order module.
