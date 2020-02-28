@@ -92,10 +92,10 @@ void get_button_signal(){
             else hardware_command_order_light(floor, HARDWARE_ORDER_DOWN, 1);
         }
         //Ser om det er en ordre innenfra
-        if(hardware_read_order(f, HARDWARE_ORDER_INSIDE) && queue[f] != 2){
-            add_order_request(f, HARDWARE_ORDER_INSIDE);
+        if(hardware_read_order(floor, HARDWARE_ORDER_INSIDE) && queue[floor] != 2){
+            add_order_request(floor, HARDWARE_ORDER_INSIDE);
             if(queue[next_order] != 2 && queue[order_on_hold] != 2) {
-                order_on_hold = f;
+                order_on_hold = floor
                 update_next_order();
             }
 
