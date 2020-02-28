@@ -66,26 +66,26 @@ void clear_all_orders(){
 }
 void get_button_signal(){
     /* All buttons must be polled, like this: */
-    for(int f = 0; f < HARDWARE_NUMBER_OF_FLOORS; f++){
+    for(int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++){
         //Ser om vi har en bestilling ovenifra
-        if(hardware_read_order(f, HARDWARE_ORDER_UP) && queue[f] == -1){
+        if(hardware_read_order(floor, HARDWARE_ORDER_UP) && queue[floor] == -1){
             //Legg til i kø oppover
-            if(queue[f] == -1){
-                add_order_request(f, HARDWARE_ORDER_UP);
+            if(queue[floor] == -1){
+                add_order_request(floor, HARDWARE_ORDER_UP);
                 if(queue[order_on_hold] != -1) {
-                    order_on_hold = f;
+                    order_on_hold = floor;
                     update_next_order();
                 }
             }
             else hardware_command_order_light(floor, HARDWARE_ORDER_UP,1);
         }
         //Ser om vi har en bestilling nedenifra
-        if(hardware_read_order(f, HARDWARE_ORDER_DOWN)){
+        if(hardware_read_order(floor, HARDWARE_ORDER_DOWN)){
             //Legg til i kø oppover
-            if(queue[f] == -1){
-            add_order_request(f, HARDWARE_ORDER_DOWN);
+            if(queue[floor] == -1){
+            add_order_request(floor, HARDWARE_ORDER_DOWN);
                 if(queue[order_on_hold] != -1) {
-                    order_on_hold = f;
+                    order_on_hold = floor;
                     update_next_order();
                 }
             }
