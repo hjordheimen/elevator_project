@@ -8,7 +8,7 @@
 #define BETWEEN_FLOORS -1
 
 static int current_floor = BETWEEN_FLOORS;
-static int last_floor = BETWEEN_FLOORS;
+// static int last_floor = BETWEEN_FLOORS;
 static HardwareMovement last_movement = HARDWARE_MOVEMENT_STOP;
 static action_t action = ENTER;
 static state_t state = IDLE;
@@ -43,50 +43,50 @@ void idle(){
 void go_up(){
     switch (action) {
         case ENTER:
-        hardware_command_movement(HARDWARE_MOVEMENT_UP);
-        last_movement = HARDWARE_MOVEMENT_UP;
-        next_state(GOING_UP, INSIDE);
+            hardware_command_movement(HARDWARE_MOVEMENT_UP);
+            last_movement = HARDWARE_MOVEMENT_UP;
+            next_state(GOING_UP, INSIDE);
             break;
         case INSIDE:
-
+            other_on_the_way();
             if (current_floor == get_next_order()) {
                 next_state(HALT, ENTER);
             }
             break;
         default:
-        break;
+            break;
 }
 }
 
 void go_down(){
     switch (action) {
         case ENTER:
-        hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
-        last_movement = HARDWARE_MOVEMENT_DOWN;
-        next_state(GOING_DOWN, INSIDE);
+            hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
+            last_movement = HARDWARE_MOVEMENT_DOWN;
+            next_state(GOING_DOWN, INSIDE);
             break;
         case INSIDE:
-
-        if (current_floor == get_next_order()) {
-            next_state(HALT, ENTER);
-        }
+            other_on_the_way();
+            if (current_floor == get_next_order()) {
+                next_state(HALT, ENTER);
+            }
             break;
         default:
-        break;
+            break;
 }
 }
 
 void halt(){
     switch (action) {
         case ENTER:
-        hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-        hardware_command_floor_indicator_on(current_floor);
-        clear_floor_orders(current_floor);
-        update_next_order();
-        //OPEN DOOR for 3 seconds, Sette på en Timer.
-        hardware_command_door_open(1);
-        door_time = time(NULL);
-        next_state(HALT, INSIDE);
+            hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+            hardware_command_floor_indicator_on(current_floor);
+            clear_floor_orders(current_floor);
+            update_next_order();
+            //OPEN DOOR for 3 seconds, Sette på en Timer.
+            hardware_command_door_open(1);
+            door_time = time(NULL);
+            next_state(HALT, INSIDE);
             break;
         case INSIDE:
         //Hvis timeren er ferdig, hopp til exit, der vi lukker døren, og går videre.
@@ -96,16 +96,16 @@ void halt(){
             break;
         case EXIT:
         //Dørene lukkes.
-        hardware_command_door_open(0);
-        if (get_next_order() == -1) {
-            next_state(IDLE, ENTER);
-        }
-        else if(get_next_order() < current_floor){
-            next_state(GOING_DOWN, ENTER);
-        }
-        else{
-            next_state(GOING_UP, ENTER);
-        }
+            hardware_command_door_open(0);
+            if (get_next_order() == -1) {
+                next_state(IDLE, ENTER);
+            }
+            else if(get_next_order() < current_floor){
+                next_state(GOING_DOWN, ENTER);
+            }
+            else{
+                next_state(GOING_UP, ENTER);
+            }
             break;
         default:
         break;
