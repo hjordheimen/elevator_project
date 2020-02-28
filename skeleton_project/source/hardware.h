@@ -6,6 +6,8 @@
  * from 2006 ;)
  *
  * Kolbjørn Austreng
+ *
+ * Minor tweek by Henrik Jordheim
  */
 #ifndef HARDWARE_H
 #define HARDWARE_H
