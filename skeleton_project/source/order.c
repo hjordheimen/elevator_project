@@ -72,7 +72,7 @@ void get_button_signal(){
             //Legg til i kø oppover
             if(queue[floor] == -1){
                 add_order_request(floor, HARDWARE_ORDER_UP);
-                if(queue[order_on_hold] != -1) {
+                if(queue[order_on_hold] == -1) {
                     order_on_hold = floor;
                     update_next_order();
                 }
@@ -84,7 +84,7 @@ void get_button_signal(){
             //Legg til i kø oppover
             if(queue[floor] == -1){
             add_order_request(floor, HARDWARE_ORDER_DOWN);
-                if(queue[order_on_hold] != -1) {
+                if(queue[order_on_hold] == -1) {
                     order_on_hold = floor;
                     update_next_order();
                 }
