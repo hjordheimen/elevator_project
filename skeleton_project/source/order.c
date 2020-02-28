@@ -26,6 +26,7 @@ static void clear_all_order_lights(){
 }
 
 
+
 int get_next_order(){
     return next_order;
 }
@@ -44,24 +45,15 @@ void update_next_order(){
 }
 
 void add_order_request(int floor, HardwareOrder order){
-    queue[floor] = hardware_order_type_bit(order);
     hardware_command_order_light(floor, order, 1);
+    if(queue[floor] != -1) queue[floor] = hardware_order_type_bit(order);
+
 }
 
 void clear_floor_orders(int floor){
-    switch (queue[floor]) {
-        case 0:
-            hardware_command_order_light(floor, HARDWARE_ORDER_UP, 0);
-            break;
-        case 1:
-            hardware_command_order_light(floor, HARDWARE_ORDER_DOWN, 0);
-            break;
-        case 2:
-            hardware_command_order_light(floor, HARDWARE_ORDER_INSIDE, 0);
-            break;
-        default:
-            break;
-    }
+    hardware_command_order_light(floor, HARDWARE_ORDER_UP,0);
+    hardware_command_order_light(floor, HARDWARE_ORDER_DOWN,0);
+    hardware_command_order_light(floor, HARDWARE_ORDER_INSIDE,0);
     queue[floor] = -1;
     next_order = -1;
 }
@@ -78,21 +70,26 @@ void get_button_signal(){
         //Ser om vi har en bestilling ovenifra
         if(hardware_read_order(f, HARDWARE_ORDER_UP) && queue[f] == -1){
             //Legg til i kø oppover
-            add_order_request(f, HARDWARE_ORDER_UP);
-            if(queue[order_on_hold] != -1) {
-                order_on_hold = f;
-                update_next_order();
+            if(queue[f] == -1){
+                add_order_request(f, HARDWARE_ORDER_UP);
+                if(queue[order_on_hold] != -1) {
+                    order_on_hold = f;
+                    update_next_order();
+                }
             }
+            else hardware_command_order_light(floor, HARDWARE_ORDER_UP,1);
         }
         //Ser om vi har en bestilling nedenifra
-        if(hardware_read_order(f, HARDWARE_ORDER_DOWN) && queue[f] == -1){
+        if(hardware_read_order(f, HARDWARE_ORDER_DOWN)){
             //Legg til i kø oppover
+            if(queue[f] == -1){
             add_order_request(f, HARDWARE_ORDER_DOWN);
-            if(queue[order_on_hold] != -1) {
-                order_on_hold = f;
-                update_next_order();
+                if(queue[order_on_hold] != -1) {
+                    order_on_hold = f;
+                    update_next_order();
+                }
             }
-
+            else hardware_command_order_light(floor, HARDWARE_ORDER_DOWN, 1);
         }
         //Ser om det er en ordre innenfra
         if(hardware_read_order(f, HARDWARE_ORDER_INSIDE) && queue[f] != 2){
