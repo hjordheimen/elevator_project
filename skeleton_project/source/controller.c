@@ -14,6 +14,22 @@ static action_t action = ENTER;
 static state_t state = IDLE;
 static int door_time;
 
+static void other_on_the_way(){
+    if(last_movement == HARDWARE_MOVEMENT_UP){
+        for (int floor = current_floor; floor < get_next_order(); floor++){
+            if (check_floor_dir_value(floor, 0)){
+                put_order_on_hold(floor);
+            }
+        }
+    }
+    else{
+        for (int floor = current_floor; floor > get_next_order(); floor--){
+            if (check_floor_dir_value(floor, 1)){
+                put_order_on_hold(floor);
+            }
+        }
+    }
+}
 
 void initialize(){
     hardware_init();
@@ -114,22 +130,7 @@ void halt(){
 
 }
 
-static void other_on_the_way(){
-    if(last_movement == HARDWARE_MOVEMENT_UP){
-        for (int floor = current_floor; floor < get_next_order(); floor++){
-            if (check_floor_dir_value(floor, 0)){
-                put_order_on_hold(floor);
-            }
-        }
-    }
-    else{
-        for (int floor = current_floor; floor > get_next_order(); floor--){
-            if (check_floor_dir_value(floor, 1)){
-                put_order_on_hold(floor);
-            }
-        }
-    }
-}
+
 
 void obstruction(int obstruction_signal){
     if(obstruction_signal){
