@@ -31,7 +31,7 @@ static void other_on_the_way(){
     }
 }
 
-static int three_seconds_gone(){
+static int closing_time(){
     if(time(NULL) - door_time > CLOSING_TIME) return 1;
     return 0;
 }
@@ -117,7 +117,7 @@ void halt(){
             break;
         case INSIDE:
             obstruction();
-            if(three_seconds_gone()) next_state(HALT, EXIT);
+            if(closing_time()) next_state(HALT, EXIT);
             break;
         case EXIT:
             hardware_command_door_open(0);
@@ -179,7 +179,7 @@ int stop(){
         }
         hardware_command_stop_light(0);
         door_time = time(NULL);
-        while (!three_seconds_gone()) {
+        while (!closing_time()) {
             if(hardware_read_floor_sensor(current_floor)) obstruction();
         }
         hardware_command_door_open(0);
