@@ -176,7 +176,7 @@ int stop(){
         hardware_command_stop_light(0);
         door_time = time(NULL);
         while (!three_seconds_gone()) {
-            if(hardware_read_floor_sensor(current_floor)) obstruction());
+            if(hardware_read_floor_sensor(current_floor)) obstruction();
         }
         hardware_command_door_open(0);
         next_state(IDLE, ENTER);
