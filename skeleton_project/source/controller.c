@@ -162,9 +162,6 @@ void next_state(state_t next_state, action_t next_action){
         action = next_action;
 }
 
-state_t get_next_state(){
-    return state;
-}
 
 
 int read_buttons(){

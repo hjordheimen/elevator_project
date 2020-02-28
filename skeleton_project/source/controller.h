@@ -86,13 +86,6 @@ void update_current_floor();
 
 void next_state(state_t next_state, action_t next_action);
 
-/**
-* @brief Gives all the modules listening to controller a function to get the state.
-*
-*/
-
-
-state_t get_next_state();
 
 /**
 * @brief While the door is open, and the obstruction flicker is on, then the whole
