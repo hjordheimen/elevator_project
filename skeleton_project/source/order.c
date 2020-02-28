@@ -68,7 +68,7 @@ void get_button_signal(){
     /* All buttons must be polled, like this: */
     for(int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++){
         //Ser om vi har en bestilling ovenifra
-        if(hardware_read_order(floor, HARDWARE_ORDER_UP) && queue[floor] == -1){
+        if(hardware_read_order(floor, HARDWARE_ORDER_UP)){
             //Legg til i kø oppover
             if(queue[floor] == -1){
                 add_order_request(floor, HARDWARE_ORDER_UP);
