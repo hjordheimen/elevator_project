@@ -31,6 +31,11 @@ static void other_on_the_way(){
     }
 }
 
+static three_seconds_gone(){
+    if(time(NULL) - door_time > CLOSING_TIME) return 1;
+    return 0;
+}
+
 void initialize(){
     hardware_init();
     clear_all_orders();
@@ -99,19 +104,15 @@ void halt(){
             hardware_command_floor_indicator_on(current_floor);
             clear_floor_orders(current_floor);
             update_next_order();
-            //OPEN DOOR for 3 seconds, Sette på en Timer.
             hardware_command_door_open(1);
             door_time = time(NULL);
             next_state(HALT, INSIDE);
             break;
         case INSIDE:
-        //Hvis timeren er ferdig, hopp til exit, der vi lukker døren, og går videre.
-            if(time(NULL) - door_time > CLOSING_TIME) next_state(HALT, EXIT);
-            //Sette inn obstruksjonsknappen her
-            obstruction(hardware_read_obstruction_signal());
+            obstruction();
+            if(three_seconds_gone()) next_state(HALT, EXIT);
             break;
         case EXIT:
-        //Dørene lukkes.
             hardware_command_door_open(0);
             if (get_next_order() == -1) {
                 next_state(IDLE, ENTER);
@@ -132,8 +133,8 @@ void halt(){
 
 
 
-void obstruction(int obstruction_signal){
-    while(obstruction_signal){
+void obstruction(){
+    while(hardware_read_obstruction_signal()){
         door_time = time(NULL);
     }
 }
@@ -174,8 +175,8 @@ int stop(){
         }
         hardware_command_stop_light(0);
         door_time = time(NULL);
-        while (time(NULL) - door_time < CLOSING_TIME) {
-            if(hardware_read_floor_sensor(current_floor)) obstruction(hardware_read_obstruction_signal());
+        while (!three_seconds_gone()) {
+            if(hardware_read_floor_sensor(current_floor)) obstruction());
         }
         hardware_command_door_open(0);
         next_state(IDLE, ENTER);
