@@ -133,7 +133,7 @@ void halt(){
 
 
 void obstruction(int obstruction_signal){
-    if(obstruction_signal){
+    while(obstruction_signal){
         door_time = time(NULL);
     }
 }
