@@ -8,6 +8,7 @@
 #define BETWEEN_FLOORS -1
 
 static int current_floor = BETWEEN_FLOORS;
+static int last_floor = BETWEEN_FLOORS;
 static HardwareMovement last_movement = HARDWARE_MOVEMENT_STOP;
 static action_t action = ENTER;
 static state_t state = IDLE;
@@ -47,11 +48,7 @@ void go_up(){
         next_state(GOING_UP, INSIDE);
             break;
         case INSIDE:
-            for (int floor = current_floor; floor < get_next_order(); floor++){
-                if (check_floor_dir_value(floor, 0)){
-                    put_order_on_hold(floor);
-                }
-            }
+
             if (current_floor == get_next_order()) {
                 next_state(HALT, ENTER);
             }
@@ -69,11 +66,7 @@ void go_down(){
         next_state(GOING_DOWN, INSIDE);
             break;
         case INSIDE:
-        for (int floor = current_floor; floor > get_next_order(); floor--){
-            if (check_floor_dir_value(floor, 1)){
-                put_order_on_hold(floor);
-            }
-        }
+
         if (current_floor == get_next_order()) {
             next_state(HALT, ENTER);
         }
@@ -119,6 +112,23 @@ void halt(){
 
     }
 
+}
+
+static void other_on_the_way(){
+    if(last_movement == HARDWARE_MOVEMENT_UP){
+        for (int floor = current_floor; floor < get_next_order(); floor++){
+            if (check_floor_dir_value(floor, 0)){
+                put_order_on_hold(floor);
+            }
+        }
+    }
+    else{
+        for (int floor = current_floor; floor > get_next_order(); floor--){
+            if (check_floor_dir_value(floor, 1)){
+                put_order_on_hold(floor);
+            }
+        }
+    }
 }
 
 void obstruction(int obstruction_signal){
