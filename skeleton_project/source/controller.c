@@ -9,10 +9,14 @@
 
 static int current_floor = BETWEEN_FLOORS;
 static int last_floor = BETWEEN_FLOORS;
+static int door_time;
+
 static HardwareMovement last_movement = HARDWARE_MOVEMENT_STOP;
+
 static action_t action = ENTER;
 static state_t state = IDLE;
-static int door_time;
+
+
 
 static void other_on_the_way(){
     if(last_movement == HARDWARE_MOVEMENT_UP){
