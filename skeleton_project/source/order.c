@@ -27,6 +27,11 @@ static void clear_all_order_lights(){
 
 
 
+int get_next_order(){
+    return next_order;
+}
+
+
 void put_order_on_hold(int new_next_order){
     if(order_on_hold == -1) order_on_hold = next_order;
     next_order = new_next_order;

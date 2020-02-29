@@ -16,6 +16,12 @@
 
 
 /**
+* @brief returns the next order (if there is any).
+*/
+
+int get_next_order();
+
+/**
 * @brief Takes the current order, and puts it on hold, and takes on the next order.
 *
 * @param new_next_order is an order of HardwareOrder
