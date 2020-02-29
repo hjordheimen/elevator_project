@@ -13,9 +13,6 @@ static void sigint_handler(int sig){
 
 int main(){
     signal(SIGINT, sigint_handler);
-    hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-    printf("NU KØR VI!\n");
-
     control_init();
 
     while(1){
