@@ -12,8 +12,6 @@ static void sigint_handler(int sig){
 }
 
 int main(){
-
-
     signal(SIGINT, sigint_handler);
     hardware_command_movement(HARDWARE_MOVEMENT_STOP);
     printf("NU KØR VI!\n");
@@ -21,7 +19,7 @@ int main(){
     control_init();
 
     while(1){
-        switch (get_next_state()) {
+        switch (control_next_state()) {
             case IDLE:
                 idle();
                 break;

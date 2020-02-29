@@ -158,7 +158,7 @@ void halt(){
 
 }
 
-state_t control_get_next_state(){
+state_t control_next_state(){
     return state;
 }
 
