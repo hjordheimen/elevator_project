@@ -4,6 +4,8 @@
  * a state machine, where it can hold 4 types of states, and have up to 3 actions
  * to do while in a specific state.
  *
+ *@dependencies hardware, order
+ *
  * Controller is where the magic happens ;)
  *
  * Henrik Jordheim
