@@ -75,6 +75,13 @@ void go_down();
 void halt();
 
 /**
+*@brief returns the next state
+*
+*/
+
+state_t control_get_next_state();
+
+/**
 * @brief updates the global value @c current_floor
 * Uses the @c hardware_read_floor_sensor to orientate the elevator
 */

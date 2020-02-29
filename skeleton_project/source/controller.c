@@ -158,6 +158,10 @@ void halt(){
 
 }
 
+state_t control_get_next_state(){
+    return state;
+}
+
 
 void control_update_current_floor(){
     for (int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
