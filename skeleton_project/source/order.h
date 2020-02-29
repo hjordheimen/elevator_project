@@ -19,7 +19,7 @@
 * @brief returns the next order (if there is any).
 */
 
-int get_next_order();
+int order_get_next();
 
 /**
 * @brief Takes the current order, and puts it on hold, and takes on the next order.
@@ -28,24 +28,15 @@ int get_next_order();
 */
 
 
-void put_order_on_hold(int new_next_order);
+void order_put_on_hold(int new_next_order);
 
 
 /**
 * @brief updates the orders. If there isn't any next order, see if we got any on hold.
 */
 
-void update_next_order();
+void order_update_next();
 
-
-/**
-* @brief adds an order to a given floor.
-*
-* @param floor is the floor where the elevator is wanted
-* @param order is where the elevator should go afterwards
-*/
-
-void add_order_request(int floor, HardwareOrder order);
 
 /**
 * @brief when the order is done, the floor-order is cleared (set to -1).
@@ -53,36 +44,36 @@ void add_order_request(int floor, HardwareOrder order);
 * @param floor is the floor to be cleared
 */
 
-void clear_floor_orders(int floor);
+void order_clear_floor(int floor);
 
 /**
-* @brief clear all orders at every floor. Uses clear_floor_orders
+* @brief clear all orders at every floor. Uses order_clear_floor
 *
 */
 
-void clear_all_orders();
+void order_clear_all();
 
 /**
 * @brief polls orders, takes orders depending on the direction or INSIDE the elevator.
 * If there is an order already at a floor, nothing happens (Unless there is an INSIDE request)
 */
 
-void get_button_signal();
+void order_pull_buttons();
 
 /**
 * @brief returns a 1 if there is more orders to dispatch, else returns 0
 *
 */
 
-int any_requests();
+int order_any_requests();
 
 /**
 * @brief looks at a floor with the same direction value as the current order.
 * returns a 1 if the floor is different than the current order, else 0
 *
 * @param floor indicates the floor wich is evalueted in the direction the order is at
-* @param directionvalue is FYLLL INN MER HER!!
+* @param dir_value is FYLLL INN MER HER!!
 */
 
 
-int check_floor_dir_value(int floor, int directionvalue);
+int order_floor_dir_value(int floor, int dir_value);

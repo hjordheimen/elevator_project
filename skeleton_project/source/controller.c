@@ -20,16 +20,16 @@ static state_t state = IDLE;
 
 static void control_pick_up_order(){
     if(last_movement == HARDWARE_MOVEMENT_UP){
-        for (int floor = last_floor; floor < get_next_order(); floor++){
-            if (check_floor_dir_value(floor, 0)){
-                put_order_on_hold(floor);
+        for (int floor = last_floor; floor < order_get_next(); floor++){
+            if (order_floor_dir_value(floor, 0)){
+                order_put_on_hold(floor);
             }
         }
     }
     else{
-        for (int floor = last_floor; floor > get_next_order(); floor--){
-            if (check_floor_dir_value(floor, 1)){
-                put_order_on_hold(floor);
+        for (int floor = last_floor; floor > order_get_next(); floor--){
+            if (order_floor_dir_value(floor, 1)){
+                order_put_on_hold(floor);
             }
         }
     }
@@ -41,12 +41,12 @@ static int control_closing_time(){
 }
 
 static void control_move_elevator(){
-    if(current_floor == BETWEEN_FLOORS && last_floor == get_next_order()){
+    if(current_floor == BETWEEN_FLOORS && last_floor == order_get_next()){
         if(last_movement == HARDWARE_MOVEMENT_UP) control_next_state(GOING_DOWN, ENTER);
         else control_next_state(GOING_UP, ENTER);
     }
     else{
-        if (get_next_order() < current_floor) {
+        if (order_get_next() < current_floor) {
             control_next_state(GOING_DOWN, ENTER);
         }
         else control_next_state(GOING_UP, ENTER);
@@ -66,7 +66,7 @@ static void control_next_state(state_t control_next_state, action_t next_action)
 
 void control_init(){
     hardware_init();
-    clear_all_orders();
+    order_clear_all();
     control_update_current_floor();
     hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
     while (current_floor == BETWEEN_FLOORS) {
@@ -80,7 +80,7 @@ void control_init(){
 
 void idle(){
     hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-    if (any_requests()) control_move_elevator();
+    if (order_any_requests()) control_move_elevator();
 }
 
 void go_up(){
@@ -92,7 +92,7 @@ void go_up(){
             break;
         case INSIDE:
             control_pick_up_order();
-            if (current_floor == get_next_order()) {
+            if (current_floor == order_get_next()) {
                 control_next_state(HALT, ENTER);
             }
             break;
@@ -110,7 +110,7 @@ void go_down(){
             break;
         case INSIDE:
             control_pick_up_order();
-            if (current_floor == get_next_order()) {
+            if (current_floor == order_get_next()) {
                 control_next_state(HALT, ENTER);
             }
             break;
@@ -124,8 +124,8 @@ void halt(){
         case ENTER:
             hardware_command_movement(HARDWARE_MOVEMENT_STOP);
             hardware_command_floor_indicator_on(last_floor);
-            clear_floor_orders(last_floor);
-            update_next_order();
+            order_clear_floor(last_floor);
+            order_update_next();
             hardware_command_door_open(1);
             door_time = time(NULL);
             control_next_state(HALT, INSIDE);
@@ -136,10 +136,10 @@ void halt(){
             break;
         case EXIT:
             hardware_command_door_open(0);
-            if (get_next_order() == -1) {
+            if (order_get_next() == -1) {
                 control_next_state(IDLE, ENTER);
             }
-            else if(get_next_order() < last_floor){
+            else if(order_get_next() < last_floor){
                 control_next_state(GOING_DOWN, ENTER);
             }
             else{
@@ -166,13 +166,13 @@ void control_update_current_floor(){
 
 
 void control_read_buttons(){
-    get_button_signal();
+    order_pull_buttons();
 }
 
 void control_stop(){
     if(hardware_read_stop_signal()){
         hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-        clear_all_orders();
+        order_clear_all();
         hardware_command_stop_light(1);
         while (hardware_read_stop_signal()) {
             if(hardware_read_floor_sensor(current_floor)) hardware_command_door_open(1);

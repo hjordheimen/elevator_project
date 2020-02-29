@@ -83,7 +83,7 @@ void halt();
 void update_current_floor();
 
 /**
-* @brief Uses @c get_button_signal from the order module.
+* @brief Uses @c order_pull_buttons from the order module.
 *
 * Makes the connection between main and order.
 */
