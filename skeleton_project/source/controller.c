@@ -165,12 +165,11 @@ void update_current_floor(){
 }
 
 
-int read_buttons(){
+void read_buttons(){
     get_button_signal();
-    return 0;
 }
 
-int stop(){
+void stop(){
     if(hardware_read_stop_signal()){
         hardware_command_movement(HARDWARE_MOVEMENT_STOP);
         clear_all_orders();
@@ -186,5 +185,4 @@ int stop(){
         hardware_command_door_open(0);
         next_state(IDLE, ENTER);
     }
-    return 0;
 }
