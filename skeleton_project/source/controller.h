@@ -88,7 +88,7 @@ void update_current_floor();
 * Makes the connection between main and order.
 */
 
-int read_buttons();
+void read_buttons();
 
 /**
 * @brief stops the elevator, clears all the orders.
@@ -96,4 +96,4 @@ int read_buttons();
 * If at a valid floor: opens the door.
 */
 
-int stop();
+void stop();
