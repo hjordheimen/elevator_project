@@ -2,6 +2,7 @@
 #include "order.h"
 #include "controller.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 
 #define CLOSING_TIME 3
@@ -65,7 +66,11 @@ static void control_next_state(state_t control_next_state, action_t next_action)
 }
 
 void control_init(){
-    hardware_init();
+    int error = hardware_init();
+    if(error != 0){
+        fprintf(stderr, "Unable to initialize hardware\n");
+        exit(1);
+    }
     order_clear_all();
     control_update_current_floor();
     hardware_command_movement(HARDWARE_MOVEMENT_DOWN);

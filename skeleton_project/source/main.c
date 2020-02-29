@@ -1,13 +1,7 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <limits.h>
 #include <signal.h>
-#include "hardware.h"
 #include "controller.h"
-
-
-
-
 
 
 static void sigint_handler(int sig){
@@ -18,17 +12,13 @@ static void sigint_handler(int sig){
 }
 
 int main(){
-    int error = hardware_init();
-    if(error != 0){
-        fprintf(stderr, "Unable to initialize hardware\n");
-        exit(1);
-    }
+
 
     signal(SIGINT, sigint_handler);
     hardware_command_movement(HARDWARE_MOVEMENT_STOP);
     printf("NU KØR VI!\n");
 
-    initialize();
+    control_init();
 
     while(1){
         switch (get_next_state()) {
@@ -45,9 +35,9 @@ int main(){
                 halt();
                 break;
         }
-        read_buttons();
-        update_current_floor();
-        stop();
+        control_read_buttons();
+        control_update_current_floor();
+        control_stop();
     }
 
     return 0;

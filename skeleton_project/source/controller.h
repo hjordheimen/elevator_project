@@ -43,7 +43,7 @@ typedef enum action {
 * When done: Entering IDLE-mode
 */
 
-void initialize();
+void control_init();
 
 /**
 * @brief The elevator is standing still, and continously looking for new requests
@@ -80,7 +80,7 @@ void halt();
 */
 
 
-void update_current_floor();
+void control_update_current_floor();
 
 /**
 * @brief Uses @c order_pull_buttons from the order module.
@@ -88,7 +88,7 @@ void update_current_floor();
 * Makes the connection between main and order.
 */
 
-void read_buttons();
+void control_read_buttons();
 
 /**
 * @brief stops the elevator, clears all the orders.
