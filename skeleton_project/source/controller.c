@@ -9,10 +9,10 @@
 #define BETWEEN_FLOORS -1
 
 static int current_floor = BETWEEN_FLOORS;
-static int last_floor = BETWEEN_FLOORS;
+static int previous_floor = BETWEEN_FLOORS;
 static int door_time;
 
-static HardwareMovement last_movement = HARDWARE_MOVEMENT_STOP;
+static HardwareMovement previous_movement = HARDWARE_MOVEMENT_STOP;
 
 static action_t action = ENTER;
 static state_t state = IDLE;
@@ -20,15 +20,15 @@ static state_t state = IDLE;
 
 
 static void control_pick_up_order(){
-    if(last_movement == HARDWARE_MOVEMENT_UP){
-        for (int floor = last_floor; floor < order_get_next(); floor++){
+    if(previous_movement == HARDWARE_MOVEMENT_UP){
+        for (int floor = previous_floor; floor < order_get_next(); floor++){
             if (order_floor_dir_value(floor, 0)){
                 order_put_on_hold(floor);
             }
         }
     }
     else{
-        for (int floor = last_floor; floor > order_get_next(); floor--){
+        for (int floor = previous_floor; floor > order_get_next(); floor--){
             if (order_floor_dir_value(floor, 1)){
                 order_put_on_hold(floor);
             }
@@ -42,8 +42,8 @@ static int control_closing_time(){
 }
 
 static void control_move_elevator(){
-    if(current_floor == BETWEEN_FLOORS && last_floor == order_get_next()){
-        if(last_movement == HARDWARE_MOVEMENT_UP) control_next_state(GOING_DOWN, ENTER);
+    if(current_floor == BETWEEN_FLOORS && previous_floor == order_get_next()){
+        if(previous_movement == HARDWARE_MOVEMENT_UP) control_next_state(GOING_DOWN, ENTER);
         else control_next_state(GOING_UP, ENTER);
     }
     else{
@@ -92,7 +92,7 @@ void go_up(){
     switch (action) {
         case ENTER:
             hardware_command_movement(HARDWARE_MOVEMENT_UP);
-            last_movement = HARDWARE_MOVEMENT_UP;
+            previous_movement = HARDWARE_MOVEMENT_UP;
             control_next_state(GOING_UP, INSIDE);
             break;
         case INSIDE:
@@ -110,7 +110,7 @@ void go_down(){
     switch (action) {
         case ENTER:
             hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
-            last_movement = HARDWARE_MOVEMENT_DOWN;
+            previous_movement = HARDWARE_MOVEMENT_DOWN;
             control_next_state(GOING_DOWN, INSIDE);
             break;
         case INSIDE:
@@ -128,8 +128,8 @@ void halt(){
     switch (action) {
         case ENTER:
             hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-            hardware_command_floor_indicator_on(last_floor);
-            order_clear_floor(last_floor);
+            hardware_command_floor_indicator_on(previous_floor);
+            order_clear_floor(previous_floor);
             order_update_next();
             hardware_command_door_open(1);
             door_time = time(NULL);
@@ -144,7 +144,7 @@ void halt(){
             if (order_get_next() == -1) {
                 control_next_state(IDLE, ENTER);
             }
-            else if(order_get_next() < last_floor){
+            else if(order_get_next() < previous_floor){
                 control_next_state(GOING_DOWN, ENTER);
             }
             else{
@@ -167,7 +167,7 @@ void control_update_current_floor(){
     for (int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
         if(hardware_read_floor_sensor(floor)) {
             current_floor = floor;
-            last_floor = current_floor;
+            previous_floor = current_floor;
         }
         else current_floor = BETWEEN_FLOORS
     }
