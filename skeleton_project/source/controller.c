@@ -10,7 +10,7 @@
 
 static int current_floor = BETWEEN_FLOORS;
 static int previous_floor = BETWEEN_FLOORS;
-static int door_time = time(NULL);
+static int door_time;
 
 static HardwareMovement previous_movement = HARDWARE_MOVEMENT_STOP;
 
