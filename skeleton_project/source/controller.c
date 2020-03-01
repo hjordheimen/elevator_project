@@ -197,6 +197,8 @@ void control_stop(){
         hardware_command_movement(HARDWARE_MOVEMENT_STOP);
         order_clear_all();
         hardware_command_stop_light(1);
+        hardware_command_door_open(1);
+        door_time = time(NULL);
         if (hardware_read_floor_sensor(current_floor)) {
             door_time = time(NULL);
             hardware_command_door_open(1);
