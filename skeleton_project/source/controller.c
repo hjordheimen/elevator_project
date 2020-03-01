@@ -52,7 +52,7 @@ static void control_move_elevator(){
         else control_set_next_state(GOING_UP, ENTER);
     }
     else{
-        if (order_get_next() < current_floor) {
+        if (order_get_next() < previous_floor) {
             control_set_next_state(GOING_DOWN, ENTER);
         }
         else control_set_next_state(GOING_UP, ENTER);
