@@ -62,7 +62,11 @@ static void control_move_elevator(){
         control_set_next_state(HALT, ENTER);
     }
     else{
-        if (order_get_next() == previous_floor) control_set_next_state(HALT, ENTER);
+        if (order_get_next() == previous_floor){
+            order_clear_floor(previous_floor);
+            control_set_next_state(HALT, ENTER);
+
+        }
         else if (order_get_next() < previous_floor) {
             control_set_next_state(GOING_DOWN, ENTER);
         }
@@ -207,7 +211,10 @@ void control_stop(){
         }
 
         while (!control_closing_time()) {
-            if(hardware_read_floor_sensor(current_floor)) control_obstruction();
+            if(hardware_read_floor_sensor(current_floor)) {
+                control_obstruction();
+                stop();
+            }
         }
         hardware_command_door_open(0);
         control_set_next_state(IDLE, ENTER);
