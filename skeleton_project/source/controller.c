@@ -60,6 +60,7 @@ static void control_move_elevator(){
             control_stop();
         }
         hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+        control_set_next_state(IDLE, ENTER);
     }
     else{
         if (order_get_next() < previous_floor) {
