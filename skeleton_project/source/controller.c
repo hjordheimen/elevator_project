@@ -198,6 +198,7 @@ void control_stop(){
         order_clear_all();
         hardware_command_stop_light(1);
         if (current_floor != BETWEEN_FLOORS) {
+            printf("noe\n");
             door_time = time(NULL);
             hardware_command_door_open(1);
             while (hardware_read_stop_signal()) {
