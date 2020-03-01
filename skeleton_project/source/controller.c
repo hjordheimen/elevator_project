@@ -41,6 +41,11 @@ static int control_closing_time(){
     return 0;
 }
 
+static void control_set_next_state(state_t next_state, action_t next_action){
+        state = next_state;
+        action = next_action;
+}
+
 static void control_move_elevator(){
     if(current_floor == BETWEEN_FLOORS && previous_floor == order_get_next()){
         if(previous_movement == HARDWARE_MOVEMENT_UP) control_set_next_state(GOING_DOWN, ENTER);
@@ -60,10 +65,6 @@ static void control_obstruction(){
     }
 }
 
-static void control_set_next_state(state_t next_state, action_t next_action){
-        state = next_state;
-        action = next_action;
-}
 
 void control_init(){
     int error = hardware_init();
