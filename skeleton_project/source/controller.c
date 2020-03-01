@@ -200,6 +200,7 @@ void control_stop(){
             if(hardware_read_floor_sensor(current_floor)){
                 hardware_command_door_open(1);
                 door_time = time(NULL);
+                control_obstruction();
             }
         }
         hardware_command_stop_light(0);
