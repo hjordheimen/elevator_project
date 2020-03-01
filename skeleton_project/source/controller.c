@@ -85,11 +85,13 @@ void control_init(){
 
 
 void idle(){
+    printf("IDLE");
     hardware_command_movement(HARDWARE_MOVEMENT_STOP);
     if (order_any_requests()) control_move_elevator();
 }
 
 void go_up(){
+    printf("UP");
     switch (action) {
         case ENTER:
             hardware_command_movement(HARDWARE_MOVEMENT_UP);
@@ -108,6 +110,7 @@ void go_up(){
 }
 
 void go_down(){
+    printf("DOWN");
     switch (action) {
         case ENTER:
             hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
@@ -126,12 +129,14 @@ void go_down(){
 }
 
 void halt(){
+    printf("HALT");
     switch (action) {
         case ENTER:
             hardware_command_movement(HARDWARE_MOVEMENT_STOP);
             hardware_command_floor_indicator_on(previous_floor);
             order_clear_floor(previous_floor);
             order_update_next();
+            printf("LYS PÅ!");
             hardware_command_door_open(1);
             door_time = time(NULL);
             control_set_next_state(HALT, INSIDE);
