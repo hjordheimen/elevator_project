@@ -50,13 +50,13 @@ static void control_move_elevator(){
     if(current_floor == BETWEEN_FLOORS && previous_floor == order_get_next() && previous_movement == HARDWARE_MOVEMENT_STOP){
         previous_floor = BETWEEN_FLOORS;
         if(previous_movement == HARDWARE_MOVEMENT_UP){
-            while (previous_floor == BETWEEN_FLOORS) {
-                hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
-                control_stop();
-            }
+            hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
         }
         else {
             hardware_command_movement(HARDWARE_MOVEMENT_UP);
+        }
+        while (previous_floor == BETWEEN_FLOORS) {
+            control_update_current_floor();
             control_stop();
         }
     }
