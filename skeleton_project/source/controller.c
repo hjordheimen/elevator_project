@@ -47,7 +47,7 @@ static void control_set_next_state(state_t next_state, action_t next_action){
 }
 
 static void control_move_elevator(){
-    if(current_floor == BETWEEN_FLOORS && previous_floor == order_get_next()){
+    if(current_floor == BETWEEN_FLOORS && previous_floor == order_get_next() && previous_movement == HARDWARE_MOVEMENT_STOP){
         previous_floor = BETWEEN_FLOORS;
         if(previous_movement == HARDWARE_MOVEMENT_UP) control_set_next_state(GOING_DOWN, ENTER);
         else control_set_next_state(GOING_UP, ENTER);
