@@ -134,6 +134,7 @@ void halt(){
     switch (action) {
         case ENTER:
             hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+            previous_movement = HARDWARE_MOVEMENT_STOP;
             hardware_command_floor_indicator_on(previous_floor);
             order_clear_floor(previous_floor);
             order_update_next();
@@ -188,6 +189,7 @@ void control_read_buttons(){
 void control_stop(){
     if(hardware_read_stop_signal()){
         hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+        previous_movement = HARDWARE_MOVEMENT_STOP;
         order_clear_all();
         hardware_command_stop_light(1);
         while (hardware_read_stop_signal()) {
