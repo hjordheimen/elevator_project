@@ -100,7 +100,7 @@ void go_up(){
             break;
         case INSIDE:
             control_pick_up_order();
-            if (previous_floor == order_get_next()) {
+            if (current_floor == order_get_next()) {
                 control_set_next_state(HALT, ENTER);
             }
             break;
@@ -119,7 +119,7 @@ void go_down(){
             break;
         case INSIDE:
             control_pick_up_order();
-            if (previous_floor == order_get_next()) {
+            if (current_floor == order_get_next()) {
                 control_set_next_state(HALT, ENTER);
             }
             break;
