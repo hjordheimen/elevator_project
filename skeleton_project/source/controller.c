@@ -203,8 +203,8 @@ void control_stop(){
             while (hardware_read_stop_signal()) {
                 door_time = time(NULL);
             }
+            hardware_command_stop_light(0);
         }
-        hardware_command_stop_light(0);
 
         while (!control_closing_time()) {
             if(hardware_read_floor_sensor(current_floor)) control_obstruction();
