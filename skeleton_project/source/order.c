@@ -65,11 +65,8 @@ void order_clear_all(){
     }
 }
 void order_pull_buttons(){
-    /* All buttons must be polled, like this: */
     for(int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++){
-        //Ser om vi har en bestilling ovenifra
         if(hardware_read_order(floor, HARDWARE_ORDER_UP)){
-            //Legg til i kø oppover
             if(queue[floor] == -1){
                 order_add_request(floor, HARDWARE_ORDER_UP);
                 if(queue[order_on_hold] == -1) {
@@ -79,9 +76,7 @@ void order_pull_buttons(){
             }
             else hardware_command_order_light(floor, HARDWARE_ORDER_UP,1);
         }
-        //Ser om vi har en bestilling nedenifra
         if(hardware_read_order(floor, HARDWARE_ORDER_DOWN)){
-            //Legg til i kø oppover
             if(queue[floor] == -1){
             order_add_request(floor, HARDWARE_ORDER_DOWN);
                 if(queue[order_on_hold] == -1) {
@@ -91,7 +86,6 @@ void order_pull_buttons(){
             }
             else hardware_command_order_light(floor, HARDWARE_ORDER_DOWN, 1);
         }
-        //Ser om det er en ordre innenfra
         if(hardware_read_order(floor, HARDWARE_ORDER_INSIDE) && queue[floor] != 2){
             order_add_request(floor, HARDWARE_ORDER_INSIDE);
             if(queue[next_order] != 2 && queue[order_on_hold] != 2) {
@@ -114,7 +108,7 @@ int order_any_requests(){
 }
 
 
-int order_floor_dir_value(int floor, int dir_value){ //Sette dir_value til en HardwareOrder type
+int order_floor_dir_value(int floor, int dir_value){ 
     if(queue[floor] == dir_value && next_order != floor){
         return 1;
     }
