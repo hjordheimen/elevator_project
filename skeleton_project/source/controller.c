@@ -88,6 +88,7 @@ void control_init(){
 void idle(){
     printf("IDLE");
     hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+    previous_movement = HARDWARE_MOVEMENT_STOP;
     if (order_any_requests()) control_move_elevator();
 }
 
