@@ -105,4 +105,4 @@ void control_read_buttons();
 * If at a valid floor: opens the door.
 */
 
-void stop();
+void control_stop();
