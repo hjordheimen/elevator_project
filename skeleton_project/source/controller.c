@@ -55,13 +55,13 @@ static void control_move_elevator(){
 }
 
 static void control_obstruction(){
-    while(hardware_read_control_obstruction_signal()){
+    while(hardware_read_obstruction_signal()){
         door_time = time(NULL);
     }
 }
 
-static void control_next_state(state_t control_next_state, action_t next_action){
-        state = control_next_state;
+static void control_next_state(state_t next_state, action_t next_action){
+        state = next_state;
         action = next_action;
 }
 
@@ -169,7 +169,7 @@ void control_update_current_floor(){
             current_floor = floor;
             previous_floor = current_floor;
         }
-        else current_floor = BETWEEN_FLOORS
+        else current_floor = BETWEEN_FLOORS;
     }
 }
 
