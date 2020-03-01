@@ -47,7 +47,7 @@ static void control_set_next_state(state_t next_state, action_t next_action){
 }
 
 static void control_move_elevator(){
-    if(current_floor == BETWEEN_FLOORS && previous_floor == order_get_next() && previous_movement == HARDWARE_MOVEMENT_STOP){
+    if(current_floor == BETWEEN_FLOORS && previous_floor == order_get_next()){
         previous_floor = BETWEEN_FLOORS;
         if(previous_movement == HARDWARE_MOVEMENT_UP){
             hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
@@ -95,7 +95,6 @@ void control_init(){
 
 void idle(){
     hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-    previous_movement = HARDWARE_MOVEMENT_STOP;
     if (order_any_requests()) control_move_elevator();
 }
 
@@ -193,7 +192,6 @@ void control_read_buttons(){
 void control_stop(){
     if(hardware_read_stop_signal()){
         hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-        previous_movement = HARDWARE_MOVEMENT_STOP;
         order_clear_all();
         hardware_command_stop_light(1);
         while (hardware_read_stop_signal()) {
