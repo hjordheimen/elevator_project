@@ -62,6 +62,7 @@ static void control_move_elevator(){
         control_set_next_state(HALT, ENTER);
     }
     else{
+        if (order_get_next() == previous_floor) control_set_next_state(HALT, ENTER);
         if (order_get_next() < previous_floor) {
             control_set_next_state(GOING_DOWN, ENTER);
         }
