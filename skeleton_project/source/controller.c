@@ -210,7 +210,7 @@ void control_stop(){
         }
 
         while (!control_closing_time()) {
-            if(hardware_read_floor_sensor(current_floor)) {
+            if(previous_movement == HARDWARE_MOVEMENT_STOP) {
                 control_obstruction();
                 control_stop();
             }
