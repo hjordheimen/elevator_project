@@ -43,14 +43,14 @@ static int control_closing_time(){
 
 static void control_move_elevator(){
     if(current_floor == BETWEEN_FLOORS && previous_floor == order_get_next()){
-        if(previous_movement == HARDWARE_MOVEMENT_UP) control_next_state(GOING_DOWN, ENTER);
-        else control_next_state(GOING_UP, ENTER);
+        if(previous_movement == HARDWARE_MOVEMENT_UP) control_set_next_state(GOING_DOWN, ENTER);
+        else control_set_next_state(GOING_UP, ENTER);
     }
     else{
         if (order_get_next() < current_floor) {
-            control_next_state(GOING_DOWN, ENTER);
+            control_set_next_state(GOING_DOWN, ENTER);
         }
-        else control_next_state(GOING_UP, ENTER);
+        else control_set_next_state(GOING_UP, ENTER);
     }
 }
 
@@ -60,7 +60,7 @@ static void control_obstruction(){
     }
 }
 
-static void control_next_state(state_t next_state, action_t next_action){
+static void control_set_next_state(state_t next_state, action_t next_action){
         state = next_state;
         action = next_action;
 }
@@ -93,12 +93,12 @@ void go_up(){
         case ENTER:
             hardware_command_movement(HARDWARE_MOVEMENT_UP);
             previous_movement = HARDWARE_MOVEMENT_UP;
-            control_next_state(GOING_UP, INSIDE);
+            control_set_next_state(GOING_UP, INSIDE);
             break;
         case INSIDE:
             control_pick_up_order();
             if (current_floor == order_get_next()) {
-                control_next_state(HALT, ENTER);
+                control_set_next_state(HALT, ENTER);
             }
             break;
         default:
@@ -111,12 +111,12 @@ void go_down(){
         case ENTER:
             hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
             previous_movement = HARDWARE_MOVEMENT_DOWN;
-            control_next_state(GOING_DOWN, INSIDE);
+            control_set_next_state(GOING_DOWN, INSIDE);
             break;
         case INSIDE:
             control_pick_up_order();
             if (current_floor == order_get_next()) {
-                control_next_state(HALT, ENTER);
+                control_set_next_state(HALT, ENTER);
             }
             break;
         default:
@@ -133,22 +133,22 @@ void halt(){
             order_update_next();
             hardware_command_door_open(1);
             door_time = time(NULL);
-            control_next_state(HALT, INSIDE);
+            control_set_next_state(HALT, INSIDE);
             break;
         case INSIDE:
             control_obstruction();
-            if(control_closing_time()) control_next_state(HALT, EXIT);
+            if(control_closing_time()) control_set_next_state(HALT, EXIT);
             break;
         case EXIT:
             hardware_command_door_open(0);
             if (order_get_next() == -1) {
-                control_next_state(IDLE, ENTER);
+                control_set_next_state(IDLE, ENTER);
             }
             else if(order_get_next() < previous_floor){
-                control_next_state(GOING_DOWN, ENTER);
+                control_set_next_state(GOING_DOWN, ENTER);
             }
             else{
-                control_next_state(GOING_UP, ENTER);
+                control_set_next_state(GOING_UP, ENTER);
             }
             break;
         default:
@@ -192,6 +192,6 @@ void control_stop(){
             if(hardware_read_floor_sensor(current_floor)) control_obstruction();
         }
         hardware_command_door_open(0);
-        control_next_state(IDLE, ENTER);
+        control_set_next_state(IDLE, ENTER);
     }
 }
