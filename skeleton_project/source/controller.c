@@ -10,7 +10,7 @@
 
 static int current_floor = BETWEEN_FLOORS;
 static int previous_floor = BETWEEN_FLOORS;
-static int door_time;
+static int door_time = time(NULL);
 
 static HardwareMovement previous_movement = HARDWARE_MOVEMENT_STOP;
 
@@ -198,9 +198,9 @@ void control_stop(){
         hardware_command_stop_light(1);
         while (hardware_read_stop_signal()) {
             if(hardware_read_floor_sensor(current_floor)) hardware_command_door_open(1);
+            door_time = time(NULL);
         }
         hardware_command_stop_light(0);
-        door_time = time(NULL);
         while (!control_closing_time()) {
             if(hardware_read_floor_sensor(current_floor)) control_obstruction();
         }
