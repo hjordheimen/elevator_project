@@ -75,7 +75,7 @@ void control_init(){
     order_clear_all();
     control_update_current_floor();
     hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
-    while (current_floor == BETWEEN_FLOORS) {
+    while (previous_floor == BETWEEN_FLOORS) {
         control_update_current_floor();
     }
     hardware_command_movement(HARDWARE_MOVEMENT_STOP);
