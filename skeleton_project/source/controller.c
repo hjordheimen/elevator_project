@@ -199,18 +199,20 @@ void control_stop(){
         hardware_command_stop_light(1);
         hardware_command_door_open(1);
         door_time = time(NULL);
-        if (hardware_read_floor_sensor(current_floor)) {
+        if (hardware_read_floor_sensor(previous_floor) && current_floor != BETWEEN_FLOORS) {
             door_time = time(NULL);
             hardware_command_door_open(1);
             while (hardware_read_stop_signal()) {
                 door_time = time(NULL);
             }
+            hardware_command_stop_light(0);
         }
-        hardware_command_stop_light(0);
+
         while (!control_closing_time()) {
             if(hardware_read_floor_sensor(current_floor)) control_obstruction();
         }
         hardware_command_door_open(0);
         control_set_next_state(IDLE, ENTER);
     }
+    else hardware_command_stop_light(0);
 }
