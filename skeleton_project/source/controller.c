@@ -213,7 +213,7 @@ void control_stop(){
         while (!control_closing_time()) {
             if(hardware_read_floor_sensor(current_floor)) {
                 control_obstruction();
-                stop();
+                control_stop();
             }
         }
         hardware_command_door_open(0);
