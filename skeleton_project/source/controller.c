@@ -63,7 +63,6 @@ static void control_move_elevator(){
     }
     else{
         if (order_get_next() == previous_floor){
-            order_clear_floor(previous_floor);
             control_set_next_state(HALT, ENTER);
 
         }
