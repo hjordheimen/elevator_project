@@ -7,7 +7,7 @@
 static void sigint_handler(int sig){
     (void)(sig);
     printf("Terminating elevator\n");
-    hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+    idle();
     exit(0);
 }
 
